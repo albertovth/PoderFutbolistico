@@ -27,7 +27,6 @@ google-api-python-client==2.8.0
 google-auth==1.31.0
 google-auth-httplib2==0.1.0
 google-search==1.1.1
-googlesearch
 googleapis-common-protos==1.53.0
 google
 googlesearch-python==1.0.1
