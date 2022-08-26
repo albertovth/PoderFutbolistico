@@ -72,188 +72,17 @@ equipo_visita_input = params['equipo_visita']
 st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
 st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
 
+st.write("Simulación de partido")
+
 for i in range(100):
-    latest_iteration.text(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
+    latest_iteration.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
     bar.progress(i+1)
     time.sleep(0.1)
 
-def equipo_casa_input_():
-    if equipo_casa_input == "Lille":
-        return "LOSC"
-    elif equipo_casa_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_casa_input == "Malmo FF":
-        return "Malmo FF datei"
-    else:
-        return equipo_casa_input
-
-def equipo_visita_input_():
-    if equipo_visita_input == "Lille":
-        return "LOSC"
-    elif equipo_visita_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_visita_input == "Malmo FF":
-        return "Malmo FF datei"
-    else:
-        return equipo_visita_input
-
-print(equipo_casa_input_())
-print(equipo_visita_input_())
-
-def club_logo_home():
-    try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = equipo_casa_input_() + " wikipedia file: logo.svg"
-
-    for j in search(query, num=1, stop=1):
-        print(j)
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    try:
-        html_page = urlopen(j)
-    except RuntimeError:
-        print('Not found')
-    soup = bs(html_page, features='html.parser')
-    images = []
-
-    for img in soup.findAll('img'):
-        images.append(img.get('src'))
-
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
-
-    logo_ht = logo_list[0]
-
-    return logo_ht
-
-def country_flag_home():
-    try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = "'Flag of " + equipo_casa_input + "'" + "File AND svg AND wikipedia AND commons"
-
-    for j in search(query, num=1, stop=1):
-        print(j)
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    try:
-        html_page = urlopen(j)
-    except RuntimeError:
-        print('Not found')
-    soup = bs(html_page, features='html.parser')
-    images = []
-
-    for img in soup.findAll('img'):
-        images.append(img.get('src'))
-
-    flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
-
-    flag_ht = flag_list[0]
-
-    return flag_ht
-
-def print_team_logo_home():
-    if spi_global_rankings['name'].str.contains(str(equipo_casa_input)).any():
-        return club_logo_home()
-    elif spi_global_rankings_intl['name'].str.contains(str(equipo_casa_input)).any():
-        return country_flag_home()
-
-
-def club_logo_road():
-    try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = equipo_visita_input_() + " wikipedia file: logo.svg"
-
-    for j in search(query, num=1, stop=1):
-        print(j)
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    try:
-        html_page = urlopen(j)
-    except RuntimeError:
-        print('Not found')
-    soup = bs(html_page, features='html.parser')
-    images = []
-
-    for img in soup.findAll('img'):
-        images.append(img.get('src'))
-
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
-
-    logo_rt = logo_list[0]
-
-    return logo_rt
-
-def country_flag_road():
-    try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = "'Flag of " + equipo_visita_input + "'" + " File AND svg AND wikipedia AND commons"
-
-    for j in search(query, num=1, stop=1):
-        print(j)
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    try:
-        html_page = urlopen(j)
-    except RuntimeError:
-        print('Not found')
-    soup = bs(html_page, features='html.parser')
-    images = []
-
-    for img in soup.findAll('img'):
-        images.append(img.get('src'))
-
-    flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
-
-    flag_rt = flag_list[0]
-
-    return flag_rt
-
-def print_team_logo_road():
-    if spi_global_rankings['name'].str.contains(str(equipo_visita_input)).any():
-        return club_logo_road()
-    elif spi_global_rankings_intl['name'].str.contains(str(equipo_visita_input)).any():
-        return country_flag_road()
-
-enlace = "http"
-team_logo_home = print_team_logo_home()
-team_logo_road = print_team_logo_road()
-
-def logo_home():
-    if "http" not in str(team_logo_home):
-        return "https:"+print_team_logo_home()
-    else:
-        return print_team_logo_home()
-
-def logo_road():
-    if "http" not in str(team_logo_road):
-        return "https:"+print_team_logo_road()
-    else:
-        return print_team_logo_road()
-
-st.write("Simulación de partido")
 col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
 with col1:
     try:
-        st.image(logo_home(), width=60)
+        st.text("")
     except RuntimeError:
         st.error("Logo no disponible")
 with col2:
@@ -262,16 +91,11 @@ with mid2:
     st.write("contra")
 with col3:
     try:
-        st.image(logo_road(), width=60)
+        st.write("")
     except RuntimeError:
         st.error("Logo no disponible")
 with col4:
     st.write(equipo_visita_input)
-
-for i in range(100):
-    latest_iteration.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
-    bar.progress(i+1)
-    time.sleep(0.1)
 
 index_casa_equipo = df_pf.index[df_pf['name'] == equipo_casa_input]
 index_visita_equipo = df_pf.index[df_pf['name'] == equipo_visita_input]
