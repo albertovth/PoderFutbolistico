@@ -107,8 +107,9 @@ def club_logo_home():
         print('No module named google found')
 
     query = equipo_casa_input_() + " wikipedia file: logo.svg"
-    global j
+
     for j in search(query, num=1, stop=1):
+        global j
         print(j)
 
     from bs4 import BeautifulSoup as bs
