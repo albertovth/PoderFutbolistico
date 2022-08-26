@@ -257,7 +257,7 @@ def logo_road():
         return "https:"+print_team_logo_road()
     else:
         return print_team_logo_road()
-    
+
 col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
 with col1:
     try:
