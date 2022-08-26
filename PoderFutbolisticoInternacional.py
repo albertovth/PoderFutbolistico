@@ -115,6 +115,7 @@ def club_logo_home():
     from urllib.request import urlopen
 
     try:
+        global j
         html_page = urlopen(j)
     except RuntimeError:
         print('Not found')
