@@ -114,14 +114,17 @@ def club_logo_home():
         var_a.append(j)
     print(var_a)
 
-
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
-    try:
-        html_page = urlopen(var_a[0])
-    except RuntimeError:
-        print('Not found')
+    if len(var_a)==0:
+        html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+    else:
+        try:
+            html_page = urlopen(var_a[0])
+        except RuntimeError:
+            print('Not found')
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -151,10 +154,14 @@ def country_flag_home():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
-    try:
-        html_page = urlopen(var_b[0])
-    except RuntimeError:
-        print('Not found')
+    if len(var_b)==0:
+       html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+    else:
+        try:
+            html_page = urlopen(var_b[0])
+        except RuntimeError:
+                print('Not found')
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -191,10 +198,14 @@ def club_logo_road():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
-    try:
-        html_page = urlopen(var_c[0])
-    except RuntimeError:
-        print('Not found')
+    if len(var_c)==0:
+        html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+    else:
+        try:
+            html_page = urlopen(var_c[0])
+        except RuntimeError:
+            print('Not found')
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -224,10 +235,14 @@ def country_flag_road():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
-    try:
-        html_page = urlopen(var_d[0])
-    except RuntimeError:
-        print('Not found')
+    if len(var_d)==0:
+        html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+    else:
+        try:
+            html_page = urlopen(var_d[0])
+        except RuntimeError:
+            print('Not found')
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -239,7 +254,6 @@ def country_flag_road():
     flag_rt = flag_list[0]
 
     return flag_rt
-
 
 def print_team_logo_road():
     if spi_global_rankings['name'].str.contains(str(equipo_visita_input)).any():
