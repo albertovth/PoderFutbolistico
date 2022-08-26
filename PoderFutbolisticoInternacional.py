@@ -110,7 +110,7 @@ def club_logo_home():
 
     var_a = []
 
-    for j in search(query, num=1, stop=1):
+    for j in search(query, num=1, stop=1, pause=2):
         var_a.append(j)
     print(var_a)
 
@@ -144,7 +144,7 @@ def country_flag_home():
 
     var_b = []
 
-    for j in search(query, num=1, stop=1):
+    for j in search(query, num=1, stop=1, pause=2):
         var_b.append(j)
     print(var_b)
 
@@ -184,7 +184,7 @@ def club_logo_road():
 
     var_c=[]
 
-    for j in search(query, num=1, stop=1):
+    for j in search(query, num=1, stop=1, pause=2):
         var_c.append(j)
     print(var_c)
 
@@ -217,7 +217,7 @@ def country_flag_road():
 
     var_d=[]
 
-    for j in search(query, num=1, stop=1):
+    for j in search(query, num=1, stop=1, pause=2):
         var_d.append(j)
     print(var_d)
 
