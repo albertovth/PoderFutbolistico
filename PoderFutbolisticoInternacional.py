@@ -104,7 +104,7 @@ def club_logo_home():
     try:
         from googlesearch import search
     except ImportError:
-        st.write('No module named google found')
+        print('No module named google found')
 
     query = equipo_casa_input_() + " wikipedia file: logo.svg"
 
@@ -112,6 +112,8 @@ def club_logo_home():
 
     for j in search(query, num=1, stop=1):
         var_a.append(j)
+    print(var_a)
+
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -119,7 +121,7 @@ def club_logo_home():
     try:
         html_page = urlopen(var_a[0])
     except RuntimeError:
-        st.write('Not found')
+        print('Not found')
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -136,14 +138,15 @@ def country_flag_home():
     try:
         from googlesearch import search
     except ImportError:
-        st.write('No module named google found')
+        print('No module named google found')
 
-    query = "'Flag of " + equipo_casa_input_() + "'" + "File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_casa_input + "'" + "File AND svg AND wikipedia AND commons"
 
     var_b = []
 
     for j in search(query, num=1, stop=1):
         var_b.append(j)
+    print(var_b)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -151,7 +154,7 @@ def country_flag_home():
     try:
         html_page = urlopen(var_b[0])
     except RuntimeError:
-        st.write('Not found')
+        print('Not found')
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -175,7 +178,7 @@ def club_logo_road():
     try:
         from googlesearch import search
     except ImportError:
-        st.write('No module named google found')
+        print('No module named google found')
 
     query = equipo_visita_input_() + " wikipedia file: logo.svg"
 
@@ -183,6 +186,7 @@ def club_logo_road():
 
     for j in search(query, num=1, stop=1):
         var_c.append(j)
+    print(var_c)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -190,7 +194,7 @@ def club_logo_road():
     try:
         html_page = urlopen(var_c[0])
     except RuntimeError:
-        st.write('Not found')
+        print('Not found')
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -209,12 +213,13 @@ def country_flag_road():
     except ImportError:
         st.write('No module named google found')
 
-    query = "'Flag of "+ equipo_visita_input_() + "'" + " File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_visita_input + "'" + " File AND svg AND wikipedia AND commons"
 
     var_d=[]
 
     for j in search(query, num=1, stop=1):
         var_d.append(j)
+    print(var_d)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -222,7 +227,7 @@ def country_flag_road():
     try:
         html_page = urlopen(var_d[0])
     except RuntimeError:
-        st.write('Not found')
+        print('Not found')
     soup = bs(html_page, features='html.parser')
     images = []
 
