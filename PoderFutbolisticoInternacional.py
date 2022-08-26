@@ -107,7 +107,7 @@ def club_logo_home():
         print('No module named google found')
 
     query = equipo_casa_input_() + " wikipedia file: logo.svg"
-
+    global j
     for j in search(query, num=1, stop=1):
         print(j)
 
@@ -115,7 +115,6 @@ def club_logo_home():
     from urllib.request import urlopen
 
     try:
-        global j
         html_page = urlopen(j)
     except RuntimeError:
         print('Not found')
