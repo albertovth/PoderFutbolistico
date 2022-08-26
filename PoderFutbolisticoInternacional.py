@@ -113,7 +113,7 @@ def club_logo_home():
     for j in search(query, num=1, stop=1):
         var_a.append(j)
 
-        st.write(var_a)
+    st.write(var_a[0])
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
