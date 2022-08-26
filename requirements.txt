@@ -98,6 +98,7 @@ typing-extensions==3.10.0.2
 tzlocal==3.0
 unicodedata2==13.0.0.post2
 uritemplate==3.0.1
+urllib3
 urllib3==1.26.5
 validators==0.18.2
 watchdog==2.1.5
