@@ -101,7 +101,6 @@ print(equipo_casa_input_())
 print(equipo_visita_input_())
 
 def club_logo_home():
-    global j
     try:
         from googlesearch import search
     except ImportError:
