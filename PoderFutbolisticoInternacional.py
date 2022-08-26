@@ -97,8 +97,8 @@ def equipo_visita_input_():
     else:
         return equipo_visita_input
 
-print(equipo_casa_input_())
-print(equipo_visita_input_())
+st.write(equipo_casa_input_())
+st.write(equipo_visita_input_())
 
 def club_logo_home():
     try:
@@ -138,7 +138,7 @@ def country_flag_home():
     except ImportError:
         st.write('No module named google found')
 
-    query = "'Flag of " + equipo_casa_input + "'" + "File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_casa_input_() + "'" + "File AND svg AND wikipedia AND commons"
 
     var_b = []
 
@@ -209,7 +209,7 @@ def country_flag_road():
     except ImportError:
         st.write('No module named google found')
 
-    query = "'Flag of " + equipo_visita_input + "'" + " File AND svg AND wikipedia AND commons"
+    query = "'Flag of "+ equipo_visita_input_() + "'" + " File AND svg AND wikipedia AND commons"
 
     var_d=[]
 
@@ -257,6 +257,7 @@ def logo_road():
         return "https:"+print_team_logo_road()
     else:
         return print_team_logo_road()
+    
 col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
 with col1:
     try:
