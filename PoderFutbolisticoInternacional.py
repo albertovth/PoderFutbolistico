@@ -18,7 +18,7 @@ import altair as alt
 import time
 import urllib
 
-st.title('Poder Futbolístico de clubes y selecciones nacionales')
+st.title('Poder Futbolístico de Clubes y Selecciones Nacionales')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 spi_global_rankings = pd.read_csv("https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv")
