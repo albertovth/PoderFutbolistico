@@ -176,7 +176,7 @@ def country_flag_home():
     from urllib.request import urlopen
 
     if len(var_b)==0:
-       html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+        html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
             html_page = urlopen(urllib.parse.quote(str(var_b[0]),safe=':/.%'))
@@ -798,3 +798,11 @@ def score_forecast():
 st.sidebar.subheader("Resultado de las simulaciones")
 
 st.sidebar.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+
+st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en")
+link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
+st.markdown(link,unsafe_allow_html=True)
+
+st.text("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en")
+link2='Wikipedia [link](https://www.Wikipedia.org)'
+st.markdown(link2,unsafe_allow_html=True)
