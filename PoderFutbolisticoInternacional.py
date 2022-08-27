@@ -114,9 +114,6 @@ def equipo_visita_input_():
     else:
         return equipo_visita_input
 
-st.write(equipo_casa_input_())
-st.write(equipo_visita_input_())
-
 def club_logo_home():
     try:
         from googlesearch import search
@@ -149,9 +146,15 @@ def club_logo_home():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "image" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
 
-    logo_ht = logo_list[0]
+    my_string = str(equipo_casa_input)
+
+    first_word = my_string.split()[0]
+
+    index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
+
+    logo_ht = logo_list[index]
 
     return logo_ht
 
@@ -188,7 +191,13 @@ def country_flag_home():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    flag_ht = flag_list[0]
+    my_string = str(equipo_casa_input)
+
+    first_word = my_string.split()[0]
+
+    index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
+
+    flag_ht = flag_list[index]
 
     return flag_ht
 
@@ -232,7 +241,13 @@ def club_logo_road():
 
     logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
 
-    logo_rt = logo_list[0]
+    my_string = str(equipo_visita_input)
+
+    first_word = my_string.split()[0]
+
+    index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
+
+    logo_rt = logo_list[index]
 
     return logo_rt
 
@@ -269,7 +284,13 @@ def country_flag_road():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    flag_rt = flag_list[0]
+    my_string = str(equipo_visita_input)
+
+    first_word = my_string.split()[0]
+
+    index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
+
+    flag_rt = flag_list[index]
 
     return flag_rt
 
