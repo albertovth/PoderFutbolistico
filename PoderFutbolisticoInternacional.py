@@ -16,6 +16,7 @@ from itertools import product
 from scipy import stats
 import altair as alt
 import time
+import urllib
 
 st.title('Poder Futbolístico de clubes y selecciones nacionales')
 ssl._create_default_https_context = ssl._create_unverified_context
@@ -38,7 +39,9 @@ spi_national_teams = spi_global_rankings_intl[['rank', 'name', 'off', 'defe', 's
 
 spi_frames = [spi_clubs, spi_national_teams]
 
-spi = pd.concat(spi_frames, ignore_index=True)
+spi = pd.concat(spi_frames)
+spi.sort_values(by=['spi'], ascending=False, inplace=True)
+spi=spi.reset_index(drop=True)
 
 latest_iteration = st.empty()
 bar = st.progress(0)
@@ -48,16 +51,30 @@ for i in range(100):
     bar.progress(i+1)
     time.sleep(0.1)
 
-@st.cache
+
 def load_data():
     return spi
 
 df_pf=load_data()
-df_pf
 
 Equipo_casa = df_pf['name']
 
 Equipo_visita = df_pf['name']
+
+# CSS to inject contained in a string
+hide_dataframe_row_index = """
+            <style>
+            .row_heading.level0 {display:none}
+            .blank {display:none}
+            </style>
+            """
+
+# Inject CSS with Markdown
+st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
+
+# Display an interactive table
+st.dataframe(spi)
+
 
 st.sidebar.subheader('Simular Partido')
 
@@ -112,18 +129,19 @@ def club_logo_home():
 
     for j in search(query, num=1, stop=1, pause=2):
         var_a.append(j)
-    print(var_a)
+    print(str(var_a))
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
+
 
     if len(var_a)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(var_a[0])
-        except RuntimeError:
-            print('Not found')
+            html_page = urlopen(urllib.parse.quote(str(var_a[0]),safe=':/.%'))
+        except FileNotFoundError:
+            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
@@ -131,7 +149,7 @@ def club_logo_home():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "image" in k]
 
     logo_ht = logo_list[0]
 
@@ -149,7 +167,7 @@ def country_flag_home():
 
     for j in search(query, num=1, stop=1, pause=2):
         var_b.append(j)
-    print(var_b)
+    print(str(var_b))
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -158,9 +176,9 @@ def country_flag_home():
        html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(var_b[0])
-        except RuntimeError:
-                print('Not found')
+            html_page = urlopen(urllib.parse.quote(str(var_b[0]),safe=':/.%'))
+        except FileNotFoundError:
+            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
@@ -193,7 +211,7 @@ def club_logo_road():
 
     for j in search(query, num=1, stop=1, pause=2):
         var_c.append(j)
-    print(var_c)
+    print(str(var_c))
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -202,9 +220,9 @@ def club_logo_road():
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(var_c[0])
-        except RuntimeError:
-            print('Not found')
+            html_page = urlopen(urllib.parse.quote(str(var_c[0]),safe=':/.%'))
+        except FileNotFoundError:
+            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
@@ -230,7 +248,7 @@ def country_flag_road():
 
     for j in search(query, num=1, stop=1, pause=2):
         var_d.append(j)
-    print(var_d)
+    print(str(var_d))
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
@@ -239,9 +257,9 @@ def country_flag_road():
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(var_d[0])
-        except RuntimeError:
-            print('Not found')
+            html_page = urlopen(urllib.parse.quote(str(var_d[0]),safe=':/.%'))
+        except FileNotFoundError:
+            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
