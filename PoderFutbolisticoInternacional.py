@@ -799,10 +799,10 @@ st.sidebar.subheader("Resultado de las simulaciones")
 
 st.sidebar.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
 
-st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en")
+st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
-st.text("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en")
+st.text("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
 link2='Wikipedia [link](https://www.Wikipedia.org)'
 st.markdown(link2,unsafe_allow_html=True)
