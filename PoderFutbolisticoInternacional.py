@@ -120,7 +120,7 @@ def club_logo_home():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
 
     var_a = []
 
@@ -152,11 +152,12 @@ def club_logo_home():
 
     first_word = my_string.split()[0]
 
-    index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-
-    logo_ht = logo_list[index]
-
-    return logo_ht
+    try:
+        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
+        logo_ht = logo_list[index]
+        return logo_ht
+    except IndexError:
+        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_home():
     try:
@@ -195,11 +196,12 @@ def country_flag_home():
 
     first_word = my_string.split()[0]
 
-    index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-
-    flag_ht = flag_list[index]
-
-    return flag_ht
+    try:
+        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
+        flag_ht = flag_list[index]
+        return flag_ht
+    except IndexError:
+        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def print_team_logo_home():
     if spi_global_rankings['name'].str.contains(str(equipo_casa_input)).any():
@@ -245,11 +247,12 @@ def club_logo_road():
 
     first_word = my_string.split()[0]
 
-    index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-
-    logo_rt = logo_list[index]
-
-    return logo_rt
+    try:
+        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
+        logo_rt = logo_list[index]
+        return logo_rt
+    except IndexError:
+        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_road():
     try:
@@ -288,11 +291,12 @@ def country_flag_road():
 
     first_word = my_string.split()[0]
 
-    index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-
-    flag_rt = flag_list[index]
-
-    return flag_rt
+    try:
+        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
+        flag_rt = flag_list[index]
+        return flag_rt
+    except IndexError:
+        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def print_team_logo_road():
     if spi_global_rankings['name'].str.contains(str(equipo_visita_input)).any():
