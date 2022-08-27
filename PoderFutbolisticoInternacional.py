@@ -137,7 +137,7 @@ def club_logo_home():
     else:
         try:
             html_page = urlopen(urllib.parse.quote(str(var_a[0]),safe=':/.%'))
-        except FileNotFoundError:
+        except OSError as e:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -180,7 +180,7 @@ def country_flag_home():
     else:
         try:
             html_page = urlopen(urllib.parse.quote(str(var_b[0]),safe=':/.%'))
-        except FileNotFoundError:
+        except OSError as e:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -230,7 +230,7 @@ def club_logo_road():
     else:
         try:
             html_page = urlopen(urllib.parse.quote(str(var_c[0]),safe=':/.%'))
-        except FileNotFoundError:
+        except OSError as e:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -273,7 +273,7 @@ def country_flag_road():
     else:
         try:
             html_page = urlopen(urllib.parse.quote(str(var_d[0]),safe=':/.%'))
-        except FileNotFoundError:
+        except OSError as e:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -320,8 +320,8 @@ col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
 with col1:
     try:
         st.image(logo_home(), width=60)
-    except RuntimeError:
-        st.error("Logo no disponible")
+    except OSError as e:
+        st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
 with col2:
     st.write(equipo_casa_input)
 with mid2:
@@ -329,8 +329,8 @@ with mid2:
 with col3:
     try:
         st.image(logo_road(), width=60)
-    except RuntimeError:
-        st.error("Logo no disponible")
+    except OSError as e:
+        st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
 with col4:
     st.write(equipo_visita_input)
 
