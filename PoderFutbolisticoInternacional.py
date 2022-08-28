@@ -99,8 +99,6 @@ def equipo_casa_input_():
         return "LOSC"
     elif equipo_casa_input == "Lyon":
         return "Olympique Lyonnais datei"
-    elif equipo_casa_input == "Malmo FF":
-        return "Malmo FF datei"
     else:
         return equipo_casa_input
 
@@ -109,8 +107,6 @@ def equipo_visita_input_():
         return "LOSC"
     elif equipo_visita_input == "Lyon":
         return "Olympique Lyonnais datei"
-    elif equipo_visita_input == "Malmo FF":
-        return "Malmo FF datei"
     else:
         return equipo_visita_input
 
