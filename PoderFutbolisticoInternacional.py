@@ -76,15 +76,28 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 
-st.sidebar.subheader('Simular Partido')
+st.sidebar.subheader('Simular partido\nSeleccioná equipos')
+st.sidebar.text("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
 
 params={
     'equipo_casa' : st.sidebar.selectbox('Equipo de casa', Equipo_casa),
     'equipo_visita' : st.sidebar.selectbox('Equipo de visita', Equipo_visita)
 }
 
-equipo_casa_input = params['equipo_casa']
-equipo_visita_input = params['equipo_visita']
+with st.sidebar:
+    if st.button("Aceptar equipos"):
+        equipo_casa_input = params['equipo_casa']
+        equipo_visita_input = params['equipo_visita']
+    else:
+        equipo_casa_input = "Ninguno"
+        equipo_visita_input = "Ninguno"
+
+    if st.button("Retirar selección"):
+        equipo_casa_input = "Ninguno"
+        equipo_visita_input = "Ninguno"
+    else:
+        equipo_casa_input = params['equipo_casa']
+        equipo_visita_input = params['equipo_visita']
 
 st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
 st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
@@ -316,23 +329,26 @@ def logo_road():
     else:
         return print_team_logo_road()
 
-col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
-with col1:
-    try:
-        st.image(logo_home(), width=60)
-    except OSError as e:
-        st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
-with col2:
-    st.write(equipo_casa_input)
-with mid2:
-    st.write("contra")
-with col3:
-    try:
-        st.image(logo_road(), width=60)
-    except OSError as e:
-        st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
-with col4:
-    st.write(equipo_visita_input)
+try:
+    col1, mid1, col2, mid2, col3, mid3, col4 = st.columns([1,1,5,5,1,1,5])
+    with col1:
+        try:
+            st.image(logo_home(), width=60)
+        except OSError as e:
+            st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
+    with col2:
+        st.write(equipo_casa_input)
+    with mid2:
+        st.write("contra")
+    with col3:
+        try:
+            st.image(logo_road(), width=60)
+        except OSError as e:
+            st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
+    with col4:
+        st.write(equipo_visita_input)
+except TypeError:
+    st.text("Por favor seleccioná equipos")
 
 st.write("Simulación de partido")
 
@@ -341,21 +357,28 @@ for i in range(100):
     bar.progress(i+1)
     time.sleep(0.1)
 
-index_casa_equipo = df_pf.index[df_pf['name'] == equipo_casa_input]
-index_visita_equipo = df_pf.index[df_pf['name'] == equipo_visita_input]
+try:
+    index_casa_equipo = df_pf.index[df_pf['name'] == equipo_casa_input]
+    index_visita_equipo = df_pf.index[df_pf['name'] == equipo_visita_input]
 
-equipo_casa_of = df_pf.at[index_casa_equipo[0], 'off']
-equipo_casa_def = df_pf.at[index_casa_equipo[0], 'defe']
+    equipo_casa_of = df_pf.at[index_casa_equipo[0], 'off']
+    equipo_casa_def = df_pf.at[index_casa_equipo[0], 'defe']
 
-equipo_visita_of = df_pf.at[index_visita_equipo[0], 'off']
-equipo_visita_def = df_pf.at[index_visita_equipo[0], 'defe']
+    equipo_visita_of = df_pf.at[index_visita_equipo[0], 'off']
+    equipo_visita_def = df_pf.at[index_visita_equipo[0], 'defe']
 
-goles_esperados_equipo_casa = ((equipo_casa_of) + (equipo_visita_def)) / 2
-goles_esperados_equipo_visita = ((equipo_visita_of) + (equipo_casa_def)) / 2
+    goles_esperados_equipo_casa = ((equipo_casa_of) + (equipo_visita_def)) / 2
+    goles_esperados_equipo_visita = ((equipo_visita_of) + (equipo_casa_def)) / 2
 
-goles_esperados_equipo_casa_redondeado = round(goles_esperados_equipo_casa,2)
+    goles_esperados_equipo_casa_redondeado = round(goles_esperados_equipo_casa,2)
 
-goles_esperados_equipo_visita_redondeado = round(goles_esperados_equipo_visita,2)
+    goles_esperados_equipo_visita_redondeado = round(goles_esperados_equipo_visita,2)
+
+except IndexError:
+    goles_esperados_equipo_casa_redondeado = 1
+    goles_esperados_equipo_visita_redondeado= 1
+    goles_esperados_equipo_casa=1
+    goles_esperados_equipo_visita=1
 
 col5, mid4, col6, mid5, col7, mid5, col8 = st.columns([1,1,5,5,1,1,5])
 
