@@ -21,9 +21,11 @@ import urllib
 st.title('Poder Futbolístico de Clubes y Selecciones Nacionales')
 ssl._create_default_https_context = ssl._create_unverified_context
 
+
 spi_global_rankings = pd.read_csv("https://projects.fivethirtyeight.com/soccer-api/club/spi_global_rankings.csv")
 spi_global_rankings.columns = ['rank', 'prev_rank', 'name', 'league', 'off', 'defe', 'spi']
 print(spi_global_rankings)
+
 
 spi_global_rankings_intl = pd.read_csv(
     "https://projects.fivethirtyeight.com/soccer-api/international/spi_global_rankings_intl.csv")
@@ -51,7 +53,7 @@ for i in range(100):
     bar.progress(i+1)
     time.sleep(0.1)
 
-
+@st.cache
 def load_data():
     return spi
 
@@ -112,6 +114,8 @@ def equipo_casa_input_():
         return "LOSC"
     elif equipo_casa_input == "Lyon":
         return "Olympique Lyonnais datei"
+    elif equipo_casa_input == "USA":
+        return "United States"
     else:
         return equipo_casa_input
 
@@ -120,6 +124,8 @@ def equipo_visita_input_():
         return "LOSC"
     elif equipo_visita_input == "Lyon":
         return "Olympique Lyonnais datei"
+    elif equipo_visita_input == "USA":
+        return "United States"
     else:
         return equipo_visita_input
 
@@ -157,7 +163,7 @@ def club_logo_home():
 
     logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
 
-    my_string = str(equipo_casa_input)
+    my_string = str(equipo_casa_input_())
 
     first_word = my_string.split()[0]
 
@@ -174,7 +180,7 @@ def country_flag_home():
     except ImportError:
         print('No module named google found')
 
-    query = "'Flag of " + equipo_casa_input + "'" + "File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_casa_input_() + "'" + "File AND svg AND wikipedia AND commons"
 
     var_b = []
 
@@ -201,7 +207,7 @@ def country_flag_home():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_casa_input)
+    my_string = str(equipo_casa_input_())
 
     first_word = my_string.split()[0]
 
@@ -252,7 +258,7 @@ def club_logo_road():
 
     logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
 
-    my_string = str(equipo_visita_input)
+    my_string = str(equipo_visita_input_())
 
     first_word = my_string.split()[0]
 
@@ -269,7 +275,7 @@ def country_flag_road():
     except ImportError:
         st.write('No module named google found')
 
-    query = "'Flag of " + equipo_visita_input + "'" + " File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_visita_input_() + "'" + " File AND svg AND wikipedia AND commons"
 
     var_d=[]
 
@@ -296,7 +302,7 @@ def country_flag_road():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_visita_input)
+    my_string = str(equipo_visita_input_())
 
     first_word = my_string.split()[0]
 
