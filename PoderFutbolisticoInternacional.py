@@ -345,7 +345,7 @@ index_casa_equipo = df_pf.index[df_pf['name'] == equipo_casa_input]
 index_visita_equipo = df_pf.index[df_pf['name'] == equipo_visita_input]
 
 equipo_casa_of = df_pf.at[index_casa_equipo[0], 'off']
-equipo_casa_def = df_pf.at[index_visita_equipo[0], 'defe']
+equipo_casa_def = df_pf.at[index_casa_equipo[0], 'defe']
 
 equipo_visita_of = df_pf.at[index_visita_equipo[0], 'off']
 equipo_visita_def = df_pf.at[index_visita_equipo[0], 'defe']
