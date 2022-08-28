@@ -146,13 +146,19 @@ def club_logo_home():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
+    my_string_=str(equipo_casa_input_())
+    first_word_ = my_string_.split()[0]
 
     if len(var_a)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(urllib.parse.quote(str(var_a[0]),safe=':/.%'))
-        except OSError as e:
+            index_a = [idx for idx, s in enumerate(var_a) if str(first_word_) in s][0]
+            try:
+                html_page = urlopen(urllib.parse.quote(str(var_a[index_a]),safe=':/.%'))
+            except OSError as e:
+                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+        except IndexError:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -191,14 +197,20 @@ def country_flag_home():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
+    my_string_=str(equipo_casa_input_())
+    first_word_ = my_string_.split()[0]
+
     if len(var_b)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(urllib.parse.quote(str(var_b[0]),safe=':/.%'))
-        except OSError as e:
+            index_b = [idx for idx, s in enumerate(var_b) if str(first_word_) in s][0]
+            try:
+                html_page = urlopen(urllib.parse.quote(str(var_b[index_b]),safe=':/.%'))
+            except OSError as e:
+                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+        except IndexError:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -242,12 +254,19 @@ def club_logo_road():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
+    my_string_=str(equipo_visita_input_())
+    first_word_ = my_string_.split()[0]
+
     if len(var_c)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(urllib.parse.quote(str(var_c[0]),safe=':/.%'))
-        except OSError as e:
+            index_c = [idx for idx, s in enumerate(var_c) if str(first_word_) in s][0]
+            try:
+                html_page = urlopen(urllib.parse.quote(str(var_c[index_c]),safe=':/.%'))
+            except OSError as e:
+                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+        except IndexError:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
@@ -286,12 +305,19 @@ def country_flag_road():
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
 
+    my_string_=str(equipo_visita_input_())
+    first_word_ = my_string_.split()[0]
+
     if len(var_d)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            html_page = urlopen(urllib.parse.quote(str(var_d[0]),safe=':/.%'))
-        except OSError as e:
+            index_d = [idx for idx, s in enumerate(var_d) if str(first_word_) in s][0]
+            try:
+                html_page = urlopen(urllib.parse.quote(str(var_d[index_d]),safe=':/.%'))
+            except OSError as e:
+                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+        except IndexError:
             html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
