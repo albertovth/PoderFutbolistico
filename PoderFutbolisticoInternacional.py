@@ -101,6 +101,8 @@ def equipo_casa_input_():
         return "Olympique Lyonnais datei"
     elif equipo_casa_input == "Malmo FF":
         return "Malmo FF datei"
+    elif equipo_casa_input == "Bodo/Glimt":
+        return "Bodø/Glimt"
     else:
         return equipo_casa_input
 
@@ -111,6 +113,8 @@ def equipo_visita_input_():
         return "Olympique Lyonnais datei"
     elif equipo_visita_input == "Malmo FF":
         return "Malmo FF datei"
+    elif equipo_visita_input == "Bodo/Glimt":
+        return "Bodø/Glimt"
     else:
         return equipo_visita_input
 
@@ -216,7 +220,7 @@ def club_logo_road():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
 
     var_c=[]
 
