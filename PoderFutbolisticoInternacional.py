@@ -190,7 +190,7 @@ def country_flag_home():
     except ImportError:
         print('No module named google found')
 
-    query = "'Flag of " + equipo_casa_input_() + "'" + "File AND svg AND wikipedia AND commons"
+    query = "'Flag of " + equipo_casa_input_() + "'" + " File AND svg AND wikipedia AND commons"
 
     var_b = []
 
