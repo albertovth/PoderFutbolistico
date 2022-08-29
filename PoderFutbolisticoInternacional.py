@@ -842,7 +842,7 @@ scores_tie = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == 
 
 idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().sort_index().idxmax()
 idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().sort_index().idxmax()
-idxmax_score_tie = scores_tie['Scores'].value_counts().idxmax()
+idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
     if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000) and (
