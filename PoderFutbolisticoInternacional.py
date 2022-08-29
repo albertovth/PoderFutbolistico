@@ -118,6 +118,8 @@ def equipo_casa_input_():
         return "United States"
     elif equipo_casa_input == "England":
         return "England England"
+    elif equipo_casa_input == "Liverpool":
+        return "Liverpool FC"
     else:
         return equipo_casa_input
 
@@ -130,6 +132,8 @@ def equipo_visita_input_():
         return "United States"
     elif equipo_visita_input == "England":
         return "England England"
+    elif equipo_visita_input == "Liverpool":
+        return "Liverpool FC"
     else:
         return equipo_visita_input
 
