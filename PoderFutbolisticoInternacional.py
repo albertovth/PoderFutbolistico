@@ -128,7 +128,7 @@ def equipo_visita_input_():
         return "Olympique Lyonnais datei"
     elif equipo_visita_input == "USA":
         return "United States"
-    elif equipo_casa_input == "England":
+    elif equipo_visita_input == "England":
         return "England England"
     else:
         return equipo_visita_input
