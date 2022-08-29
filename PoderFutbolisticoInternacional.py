@@ -840,8 +840,8 @@ scores_home_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.
 scores_road_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "equipo de visita gana"]
 scores_tie = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "empate"]
 
-idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().idxmax()
-idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().idxmax()
+idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().index_sort().idxmax()
+idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().index_sort().idxmax()
 idxmax_score_tie = scores_tie['Scores'].value_counts().idxmax()
 
 def score_forecast():
