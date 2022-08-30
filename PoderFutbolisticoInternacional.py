@@ -79,7 +79,7 @@ st.dataframe(spi)
 
 
 st.subheader('Simular partido\nSeleccioná equipos')
-st.markdown("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
+st.markdown("Es posible elegir/retirar los\nequipos aunque ya hayan iniciado\nprocesos anteriores o subsecuentes")
 
 params={
     'equipo_casa' : st.selectbox('Equipo de casa', Equipo_casa),
