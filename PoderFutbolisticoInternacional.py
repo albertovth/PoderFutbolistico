@@ -78,28 +78,28 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 
-st.sidebar.subheader('Simular partido\nSeleccioná equipos')
-st.sidebar.text("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
+st.subheader('Simular partido\nSeleccioná equipos')
+st.text("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
 
 params={
-    'equipo_casa' : st.sidebar.selectbox('Equipo de casa', Equipo_casa),
-    'equipo_visita' : st.sidebar.selectbox('Equipo de visita', Equipo_visita)
+    'equipo_casa' : st.selectbox('Equipo de casa', Equipo_casa),
+    'equipo_visita' : st.selectbox('Equipo de visita', Equipo_visita)
 }
 
-with st.sidebar:
-    if st.button("Aceptar equipos"):
-        equipo_casa_input = params['equipo_casa']
-        equipo_visita_input = params['equipo_visita']
-    else:
-        equipo_casa_input = "Ninguno"
-        equipo_visita_input = "Ninguno"
 
-    if st.button("Retirar selección"):
-        equipo_casa_input = "Ninguno"
-        equipo_visita_input = "Ninguno"
-    else:
-        equipo_casa_input = params['equipo_casa']
-        equipo_visita_input = params['equipo_visita']
+if st.button("Aceptar equipos"):
+    equipo_casa_input = params['equipo_casa']
+    equipo_visita_input = params['equipo_visita']
+else:
+    equipo_casa_input = "Ninguno"
+    equipo_visita_input = "Ninguno"
+
+if st.button("Retirar selección"):
+    equipo_casa_input = "Ninguno"
+    equipo_visita_input = "Ninguno"
+else:
+    equipo_casa_input = params['equipo_casa']
+    equipo_visita_input = params['equipo_visita']
 
 st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
 st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
