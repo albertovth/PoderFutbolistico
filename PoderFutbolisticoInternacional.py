@@ -104,9 +104,11 @@ else:
 st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
 st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
 
+bar2 = st.progress(0)
+
 for i in range(100):
     latest_iteration.text(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    bar2.progress(i+1)
     time.sleep(0.1)
 
 def equipo_casa_input_():
