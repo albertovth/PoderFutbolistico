@@ -858,9 +858,11 @@ def score_forecast():
     else:
         return(idxmax_score_tie)
 
-st.sidebar.subheader("Resultado de las simulaciones")
+st.subheader("Resultado de las simulaciones")
 
-st.sidebar.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+st.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+
+st.subheader("Fuentes")
 
 st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
