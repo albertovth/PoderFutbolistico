@@ -18,7 +18,7 @@ import altair as alt
 import time
 import urllib
 
-st.title('Poder Futbolístico de Clubes y Selecciones Nacionales')
+st.title('Predictor de Partidos de Fútbol - Clubes y Selecciones Nacionales')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
