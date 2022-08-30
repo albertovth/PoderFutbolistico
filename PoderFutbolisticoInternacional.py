@@ -124,7 +124,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Liverpool":
         return "Liverpool Football Club"
     elif equipo_casa_input == "Mexico":
-        return "Mexico Flag"
+        return "Mexico Mexico"
     else:
         return equipo_casa_input
 
@@ -140,7 +140,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Liverpool":
         return "Liverpool Football Club"
     elif equipo_visita_input == "Mexico":
-        return "Mexico Flag"
+        return "Mexico Mexico"
     else:
         return equipo_visita_input
 
