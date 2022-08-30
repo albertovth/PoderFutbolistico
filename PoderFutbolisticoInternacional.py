@@ -101,14 +101,14 @@ else:
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 
-st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
-st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
+st.markdown("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
+st.markdown("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
 
 latest_iteration2 = st.empty()
 bar2 = st.progress(0)
 
 for i in range(100):
-    latest_iteration2.text(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
+    latest_iteration2.markdown(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
     bar2.progress(i+1)
     time.sleep(0.1)
 
@@ -382,16 +382,16 @@ try:
     with col2:
         st.write(equipo_casa_input)
     with mid2:
-        st.write("contra")
+        st.markdown("contra")
     with col3:
         try:
             st.image(logo_road(), width=60)
         except OSError as e:
             st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
     with col4:
-        st.write(equipo_visita_input)
+        st.markdown(equipo_visita_input)
 except TypeError:
-    st.text("Por favor seleccioná equipos")
+    st.markdown("Por favor seleccioná equipos")
 
 st.write("Simulación de partido")
 
@@ -836,7 +836,7 @@ latest_iteration6 = st.empty()
 bar6 = st.progress(0)
 
 for i in range(100):
-    latest_iteration6.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
+    latest_iteration6.markdown(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
     bar6.progress(i+1)
     time.sleep(0.1)
 
@@ -873,14 +873,14 @@ def score_forecast():
 
 st.subheader("Resultado de las simulaciones")
 
-st.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+st.markdown("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
 
 st.subheader("Fuentes")
 
-st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
+st.markdown("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
-st.text("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
+st.markdown("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
 link2='Wikipedia [link](https://www.Wikipedia.org)'
 st.markdown(link2,unsafe_allow_html=True)
