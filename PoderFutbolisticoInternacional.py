@@ -838,8 +838,8 @@ latest_iteration6 = st.empty()
 bar6 = st.progress(0)
 
 for i in range(100):
-    latest_iteration5.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
-    bar5.progress(i+1)
+    latest_iteration6.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
+    bar6.progress(i+1)
     time.sleep(0.1)
 
 def forecast():
