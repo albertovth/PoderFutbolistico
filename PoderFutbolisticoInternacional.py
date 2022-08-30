@@ -102,6 +102,9 @@ else:
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 
+st.markdown("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
+st.markdown("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
+
 latest_iteration = st.empty()
 bar = st.progress(0)
 
@@ -109,9 +112,6 @@ for i in range(100):
     latest_iteration.markdown(f'Reuniendo índices ofensivos y defensivos por equipo seleccionado. Porcentaje completado {i+1}')
     bar.progress(i+1)
     time.sleep(0.1)
-
-st.markdown("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
-st.markdown("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
 
 latest_iteration2 = st.empty()
 bar2 = st.progress(0)
