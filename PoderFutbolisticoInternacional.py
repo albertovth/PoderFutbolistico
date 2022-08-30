@@ -881,7 +881,7 @@ st.markdown("Después de 10 000 simulaciones del\npartido, y considerando los ú
 
 st.subheader("Fuentes")
 
-st.markdown("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
+st.markdown("Los datos de la simulación provienen del repositorio público actualizado de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
