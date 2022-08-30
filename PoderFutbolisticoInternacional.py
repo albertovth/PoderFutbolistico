@@ -530,8 +530,8 @@ datalinea_partido_grafico= alt.Chart(datalinea_partido).mark_line().encode(
                                'blue'])
                     )
 ).properties(
-    width=900,
-    height=500
+    width=,
+    height=
 )
 
 latest_iteration5 = st.empty()
