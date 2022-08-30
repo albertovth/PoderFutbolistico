@@ -79,7 +79,7 @@ st.dataframe(spi)
 
 
 st.subheader('Simular partido\nSeleccioná equipos')
-st.text("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
+st.markdown("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
 
 params={
     'equipo_casa' : st.selectbox('Equipo de casa', Equipo_casa),
@@ -399,7 +399,7 @@ latest_iteration3 = st.empty()
 bar3= st.progress(0)
 
 for i in range(100):
-    latest_iteration3.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
+    latest_iteration3.markdown(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
     bar3.progress(i+1)
     time.sleep(0.1)
 
@@ -446,7 +446,7 @@ latest_iteration4 = st.empty()
 bar4 = st.progress(0)
 
 for i in range(100):
-    latest_iteration4.text(f'Simulando 10 000 partidos entre los equipos. Porcentaje completado {i+1}')
+    latest_iteration4.markdown(f'Simulando 10 000 partidos entre los equipos. Porcentaje completado {i+1}')
     bar4.progress(i+1)
     time.sleep(0.1)
 
@@ -536,7 +536,7 @@ latest_iteration5 = st.empty()
 bar5 = st.progress(0)
 
 for i in range(100):
-    latest_iteration5.text(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
+    latest_iteration5.markdown(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
     bar5.progress(i+1)
     time.sleep(0.1)
 
@@ -546,9 +546,9 @@ etiquetas = equipo_casa_input + ' gana', equipo_visita_input + ' gana', 'Empate'
 proporciones = [results.count("equipo de casa gana"), results.count("equipo de visita gana"), results.count("empate")]
 colores = ['green', 'red', 'gold']
 
-st.text(equipo_casa_gana)
-st.text(equipo_visita_gana)
-st.text(empate)
+st.markdown(equipo_casa_gana)
+st.markdown(equipo_visita_gana)
+st.markdown(empate)
 
 fig1, ax1 = plt.subplots()
 ax1.pie(proporciones, labels=etiquetas, colors=colores, autopct='%1.1f%%',
