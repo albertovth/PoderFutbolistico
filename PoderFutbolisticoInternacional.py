@@ -45,14 +45,6 @@ spi = pd.concat(spi_frames)
 spi.sort_values(by=['spi'], ascending=False, inplace=True)
 spi=spi.reset_index(drop=True)
 
-latest_iteration = st.empty()
-bar = st.progress(0)
-
-for i in range(100):
-    latest_iteration.markdown(f'Reuniendo índices ofensivos y defensivos por equipo. Porcentaje completado {i+1}')
-    bar.progress(i+1)
-    time.sleep(0.1)
-
 st.markdown("Podés simular partidos navegando bajo la tabla")
 
 @st.cache
@@ -79,6 +71,13 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 # Display an interactive table
 st.dataframe(spi)
 
+latest_iteration = st.empty()
+bar = st.progress(0)
+
+for i in range(100):
+    latest_iteration.markdown(f'Reuniendo índices ofensivos y defensivos por equipo. Porcentaje completado {i+1}')
+    bar.progress(i+1)
+    time.sleep(0.1)
 
 st.subheader('Simular partido\nSeleccioná equipos')
 st.markdown("Es posible elegir/retirar los\nequipos aunque ya hayan iniciado\nprocesos anteriores o subsecuentes,\ny aunque la pantalla esté gris")
