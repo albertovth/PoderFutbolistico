@@ -395,9 +395,12 @@ except TypeError:
 
 st.write("Simulación de partido")
 
+latest_iteration3 = st.empty()
+bar3= st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration3.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
+    bar3.progress(i+1)
     time.sleep(0.1)
 
 try:
@@ -528,9 +531,12 @@ datalinea_partido_grafico= alt.Chart(datalinea_partido).mark_line().encode(
     height=500
 )
 
+latest_iteration4 = st.empty()
+bar4 = st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration4.text(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
+    bar4.progress(i+1)
     time.sleep(0.1)
 
 st.altair_chart(datalinea_partido_grafico)
@@ -825,9 +831,12 @@ st.pyplot(fig2)
 # Define forecast algorithm in a function.
 # Forecast as a winner the team that has more victories and more than 40 % of the victories in the simulations.
 
+latest_iteration5 = st.empty()
+bar5 = st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration5.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
+    bar5.progress(i+1)
     time.sleep(0.1)
 
 def forecast():
