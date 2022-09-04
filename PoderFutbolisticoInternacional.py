@@ -157,7 +157,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Manchester United":
         return "Manchester United football club crest"
     elif equipo_visita_input == "Brazil":
-        return "Manchester Brazil national symbols"
+        return "Brazil national symbols"
     else:
         return equipo_visita_input
 
