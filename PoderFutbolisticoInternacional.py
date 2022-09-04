@@ -135,7 +135,9 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Mexico":
         return "Mexico Mexico National Symbols"
     elif equipo_casa_input == "Manchester United":
-        return "Manchester United crest"
+        return "Manchester United football club crest"
+    elif equipo_casa_input == "Brazil":
+        return "Brazil national symbols"
     else:
         return equipo_casa_input
 
@@ -152,8 +154,10 @@ def equipo_visita_input_():
         return "Liverpool Football Club"
     elif equipo_visita_input == "Mexico":
         return "Mexico Mexico National Symbols"
-    elif equipo_casa_input == "Manchester United":
-        return "Manchester United crest"
+    elif equipo_visita_input == "Manchester United":
+        return "Manchester United football club crest"
+    elif equipo_visita_input == "Brazil":
+        return "Manchester Brazil national symbols"
     else:
         return equipo_visita_input
 
