@@ -139,8 +139,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Brazil":
         return "Brazil national symbols"
     elif equipo_casa_input == "Sevilla FC":
-        return "Sevilla Football Club"
-
+        return "Séville Fútbol Club"
     else:
         return equipo_casa_input
 
@@ -162,7 +161,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Brazil":
         return "Brazil national symbols"
     elif equipo_visita_input == "Sevilla FC":
-        return "Sevilla Football Club"
+        return "Séville Fútbol Club"
     else:
         return equipo_visita_input
 
@@ -172,7 +171,7 @@ def club_logo_home():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
 
     var_a = []
 
@@ -280,7 +279,7 @@ def club_logo_road():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
 
     var_c=[]
 
