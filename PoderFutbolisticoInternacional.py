@@ -139,7 +139,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Brazil":
         return "Brazil national symbols"
     elif equipo_casa_input == "Sevilla FC":
-        return "Séville Fútbol Club"
+        return '"Sevilla FC" AND "club de futbol" AND  -"(Puerto Rico)"'
     else:
         return equipo_casa_input
 
@@ -161,7 +161,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Brazil":
         return "Brazil national symbols"
     elif equipo_visita_input == "Sevilla FC":
-        return "Séville Fútbol Club"
+        return '"Sevilla FC" AND "club de futbol" AND  -"(Puerto Rico)"'
     else:
         return equipo_visita_input
 
