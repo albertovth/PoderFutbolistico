@@ -864,11 +864,30 @@ for i in range(100):
     latest_iteration6.markdown(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
     bar6.progress(i+1)
     time.sleep(0.1)
+    
+from scipy.stats import chi2
+
+expected = [3333,3334,3333]
+
+simulated=[results.count("equipo de casa gana"),results.count("empate"),results.count("equipo de visita gana")]
+
+x = sum([(o-e)**2./e for o,e in zip(simulated,expected)])
+
+import scipy
+
+alpha = 0.5
+
+df = 2
+
+cr=chi2.ppf(q=1-alpha,df=df)
 
 def forecast():
-    if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000) and ((results.count("equipo de casa gana")) / 10000) > (0.4): return(str(equipo_casa_input) + " gana:")
-    elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000) and ((results.count("equipo de visita gana")) / 10000) > (0.4): return(str(equipo_visita_input) + " gana:")
-    else: return("el partido termina en un empate:")
+    if x>cr:
+        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_casa_input) + " gana:")
+        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_visita_input) + " gana:")
+        else: return("el partido termina en un empate:")
+    else:
+        return("el partido termina en un empate:")
 
 Results = results
 Scores = random_marcadores_partido
@@ -887,15 +906,18 @@ idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().sor
 idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
-    if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000) and (
-            (results.count("equipo de casa gana")) / 10000) > (0.4):
-        return(idxmax_score_home_team_wins)
-    elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000) and (
-            (results.count("equipo de visita gana")) / 10000) > (0.4):
-        return(idxmax_score_road_team_wins)
+    if x>cr:
+            if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and (
+                    (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000):
+                return(idxmax_score_home_team_wins)
+            elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and (
+                (results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000):
+                return(idxmax_score_road_team_wins)
+            else:
+                return(idxmax_score_tie)
     else:
-        return(idxmax_score_tie)
-
+            return(idxmax_score_tie)
+        
 st.subheader("Resultado de las simulaciones")
 
 st.markdown("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
