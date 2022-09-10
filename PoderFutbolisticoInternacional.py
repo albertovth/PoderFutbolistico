@@ -145,7 +145,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_casa_input == "Atletico Madrid":
-        return 'Club Atlético de Madrid, S.A.D. (Spanish pronunciation: [ˈkluβ aˈtletiko ðe maˈðɾið]; meaning "Athletic Club of Madrid"), known simply as Atleti in the Spanish-speaking world and commonly referred to at international level as Atlético Madrid, is a Spanish professional football club based in Madrid that plays in La Liga.'
+        return "Club Atlético de Madrid, S.A.D."
     else:
         return equipo_casa_input
 
@@ -173,7 +173,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_visita_input == "Atletico Madrid":
-        return 'Club Atlético de Madrid, S.A.D. (Spanish pronunciation: [ˈkluβ aˈtletiko ðe maˈðɾið]; meaning "Athletic Club of Madrid"), known simply as Atleti in the Spanish-speaking world and commonly referred to at international level as Atlético Madrid, is a Spanish professional football club based in Madrid that plays in La Liga.'
+        return "Club Atlético de Madrid, S.A.D."
     else:
         return equipo_visita_input
 
