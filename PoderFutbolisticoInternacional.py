@@ -145,7 +145,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_casa_input == "Atletico Madrid":
-        return "Atletico Madrid Atletico Madrid Wikipedia Αρχείο: Atletico Madrid 2017"
+        return "Atletico Madrid Atletico Madrid Wikipedia Atletico Madrid"
     else:
         return equipo_casa_input
 
@@ -173,7 +173,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_visita_input == "Atletico Madrid":
-        return "Atletico Madrid Atletico Madrid Wikipedia Αρχείο: Atletico Madrid 2017"
+        return "Atletico Madrid Atletico Madrid Wikipedia Atletico Madrid"
     else:
         return equipo_visita_input
 
