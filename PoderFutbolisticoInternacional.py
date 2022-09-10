@@ -145,7 +145,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_casa_input == "Atletico Madrid":
-        return "Atletico Madrid 2017"
+        return "Αρχείο: Atletico Madrid 2017"
     else:
         return equipo_casa_input
 
@@ -173,7 +173,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     elif equipo_visita_input == "Atletico Madrid":
-        return "Atletico Madrid 2017"
+        return "Αρχείο: Atletico Madrid 2017"
     else:
         return equipo_visita_input
 
@@ -183,7 +183,7 @@ def club_logo_home():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier OR Αρχείο AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
 
     var_a = []
 
@@ -291,7 +291,7 @@ def club_logo_road():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier OR Αρχείο AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
 
     var_c=[]
 
