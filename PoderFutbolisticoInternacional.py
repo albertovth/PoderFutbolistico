@@ -144,8 +144,6 @@ def equipo_casa_input_():
         return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_casa_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
-    elif equipo_casa_input == "Atletico Madrid":
-        return "Atletico Atletico Madrid Madrid"
     else:
         return equipo_casa_input
 
@@ -172,9 +170,6 @@ def equipo_visita_input_():
         return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_visita_input == "DC United":
         return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
-    elif equipo_visita_input == "Atletico Madrid":
-        return "Atletico Atletico Madrid Madrid"
-
     else:
         return equipo_visita_input
 
