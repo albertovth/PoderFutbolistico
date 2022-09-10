@@ -143,7 +143,7 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Tijuana":
         return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_casa_input == "DC United":
-        return "D.C. United professional soccer club"
+        return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     else:
         return equipo_casa_input
 
@@ -169,7 +169,7 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Tijuana":
         return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_visita_input == "DC United":
-        return "D.C. United professional soccer club"
+        return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
     else:
         return equipo_visita_input
 
