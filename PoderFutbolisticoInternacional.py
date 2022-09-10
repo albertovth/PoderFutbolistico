@@ -141,9 +141,9 @@ def equipo_casa_input_():
     elif equipo_casa_input == "Sevilla FC":
         return "Sevilla Sevilla Sevilla Fútbol Club Spanish professional soccer team"
     elif equipo_casa_input == "Tijuana":
-        return "Club Tijuana soccer team"
+        return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_casa_input == "DC United":
-        return "DC United soccer team"
+        return "D.C. United soccer team"
     else:
         return equipo_casa_input
 
@@ -167,9 +167,9 @@ def equipo_visita_input_():
     elif equipo_visita_input == "Sevilla FC":
         return "Sevilla Sevilla Sevilla Fútbol Club Spanish professional soccer team"
     elif equipo_visita_input == "Tijuana":
-        return "Club Tijuana soccer team"
+        return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
     elif equipo_visita_input == "DC United":
-        return "DC United soccer team"
+        return "D.C. United soccer team"
     else:
         return equipo_visita_input
 
