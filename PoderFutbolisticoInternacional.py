@@ -183,7 +183,7 @@ def club_logo_home():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier OR Αρχείο AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
 
     var_a = []
 
@@ -291,7 +291,7 @@ def club_logo_road():
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query = "File OR Datei OR Fichier OR Αρχείο AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
 
     var_c=[]
 
