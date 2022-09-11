@@ -17,8 +17,10 @@ from scipy import stats
 import altair as alt
 import time
 import urllib
+import wikipedia
+import unicodedata
 
-st.title('Poder Futbolístico de Clubes y Selecciones Nacionales')
+st.title('Predictor de Partidos de Fútbol - Clubes y Selecciones Nacionales')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -45,13 +47,15 @@ spi = pd.concat(spi_frames)
 spi.sort_values(by=['spi'], ascending=False, inplace=True)
 spi=spi.reset_index(drop=True)
 
-latest_iteration = st.empty()
-bar = st.progress(0)
+latest_iteration0= st.empty()
+bar0 = st.progress(0)
 
 for i in range(100):
-    latest_iteration.text(f'Reuniendo índices ofensivos y defensivos por equipo. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration0.markdown(f'Actualizando la base de datos con la información más reciente. Porcentaje completado {i+1}')
+    bar0.progress(i+1)
     time.sleep(0.1)
+
+st.markdown("Podés simular partidos navegando bajo la tabla")
 
 @st.cache
 def load_data():
@@ -77,89 +81,101 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 # Display an interactive table
 st.dataframe(spi)
 
-
-st.sidebar.subheader('Simular partido\nSeleccioná equipos')
-st.sidebar.text("Es posible elegir/retirar los\nequipos antes que los datos se\nrefresquen y el menú se active")
+st.subheader('Simular partido\nSeleccioná equipos')
+st.markdown("Es posible elegir/retirar los\nequipos aunque ya hayan iniciado\nprocesos anteriores o subsecuentes,\ny aunque la pantalla esté gris")
 
 params={
-    'equipo_casa' : st.sidebar.selectbox('Equipo de casa', Equipo_casa),
-    'equipo_visita' : st.sidebar.selectbox('Equipo de visita', Equipo_visita)
+    'equipo_casa' : st.selectbox('Equipo de casa', Equipo_casa),
+    'equipo_visita' : st.selectbox('Equipo de visita', Equipo_visita)
 }
 
-with st.sidebar:
-    if st.button("Aceptar equipos"):
-        equipo_casa_input = params['equipo_casa']
-        equipo_visita_input = params['equipo_visita']
-    else:
-        equipo_casa_input = "Ninguno"
-        equipo_visita_input = "Ninguno"
 
-    if st.button("Retirar selección"):
-        equipo_casa_input = "Ninguno"
-        equipo_visita_input = "Ninguno"
-    else:
-        equipo_casa_input = params['equipo_casa']
-        equipo_visita_input = params['equipo_visita']
+if st.button("Aceptar equipos"):
+    equipo_casa_input = params['equipo_casa']
+    equipo_visita_input = params['equipo_visita']
+else:
+    equipo_casa_input = "Ninguno"
+    equipo_visita_input = "Ninguno"
 
-st.text("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
-st.text("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
+if st.button("Retirar selección"):
+    equipo_casa_input = "Ninguno"
+    equipo_visita_input = "Ninguno"
+else:
+    equipo_casa_input = params['equipo_casa']
+    equipo_visita_input = params['equipo_visita']
+
+st.markdown("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
+st.markdown("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
+
+latest_iteration = st.empty()
+bar = st.progress(0)
 
 for i in range(100):
-    latest_iteration.text(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
+    latest_iteration.markdown(f'Reuniendo índices ofensivos y defensivos por equipo seleccionado. Porcentaje completado {i+1}')
     bar.progress(i+1)
     time.sleep(0.1)
 
-def equipo_casa_input_():
-    if equipo_casa_input == "Lille":
-        return "LOSC"
-    elif equipo_casa_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_casa_input == "USA":
-        return "United States"
-    elif equipo_casa_input == "England":
-        return "England England"
-    else:
-        return equipo_casa_input
+latest_iteration2 = st.empty()
+bar2 = st.progress(0)
 
-def equipo_visita_input_():
-    if equipo_visita_input == "Lille":
-        return "LOSC"
-    elif equipo_visita_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_visita_input == "USA":
-        return "United States"
-    elif equipo_casa_input == "England":
-        return "England England"
-    else:
-        return equipo_visita_input
+for i in range(100):
+    latest_iteration2.markdown(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
+    bar2.progress(i+1)
+    time.sleep(0.1)
 
 def club_logo_home():
     try:
-        from googlesearch import search
+        from wikipedia import search
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query =  wikipedia.search(str(equipo_casa_input)+" "+str("football club"))
+
+    print(query)
+
+    var_a_ = []
+
+    for i in query:
+        j=i.replace(" ","_")
+        var_a_.append(j)
+    print(str(var_a_))
 
     var_a = []
 
-    for j in search(query, num=1, stop=1, pause=2):
+    for b in var_a_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        j=urllib.parse.quote(a,safe=':/.%')
         var_a.append(j)
-    print(str(var_a))
+    print (var_a)
+
+    var_a_unquote = []
+
+    for b in var_a_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        var_a_unquote.append(a)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
+    import unidecode
 
-    my_string_=str(equipo_casa_input_())
-    first_word_ = my_string_.split()[0]
+    my_string_=str(equipo_casa_input)
+    first_word_coded = my_string_.split()[0]
+
+    first_word_=unidecode.unidecode(first_word_coded)
+
+    var_a_unidecoded = []
+
+    for i in var_a_unquote:
+        j=unidecode.unidecode(i)
+        var_a_unidecoded.append(j)
 
     if len(var_a)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            index_a = [idx for idx, s in enumerate(var_a) if str(first_word_) in s][0]
+            index_a = [idx for idx, s in enumerate(var_a_unidecoded) if str(first_word_) in s][0]
             try:
-                html_page = urlopen(urllib.parse.quote(str(var_a[index_a]),safe=':/.%'))
+                html_page = urlopen(str(var_a[index_a]))
             except OSError as e:
                 html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
         except IndexError:
@@ -171,50 +187,52 @@ def club_logo_home():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" in k]
 
-    my_string = str(equipo_casa_input_())
+    unquoted_logo_list=[]
+
+    for i in logo_list:
+        j=urllib.parse.unquote(i)
+        unquoted_logo_list.append(j)
+
+    unaccented_logo_list=[]
+
+    for i in unquoted_logo_list:
+        j=unidecode.unidecode(i)
+        unaccented_logo_list.append(j)
+
+    my_string = str(equipo_casa_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
+    print(logo_list)
+    print(first_word)
+    print(unaccented_logo_list)
+    print(unaccented_first_word)
+
     try:
-        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-        logo_ht = logo_list[index]
+        index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
+        logo_ht=logo_list[index]
         return logo_ht
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_home():
+
+    equipo_casa_input_ = equipo_casa_input.replace(" ","_")
+
+    var_b_="https://commons.wikimedia.org/wiki/"+str(equipo_casa_input_)
+
+    var_b=urllib.parse.quote(var_b_,safe=':/.%')
+
     try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = "'Flag of " + equipo_casa_input_() + "'" + "File AND svg AND wikipedia AND commons"
-
-    var_b = []
-
-    for j in search(query, num=1, stop=1, pause=2):
-        var_b.append(j)
-    print(str(var_b))
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    my_string_=str(equipo_casa_input_())
-    first_word_ = my_string_.split()[0]
-
-    if len(var_b)==0:
+        html_page = urlopen(str(var_b))
+    except OSError as e:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-    else:
-        try:
-            index_b = [idx for idx, s in enumerate(var_b) if str(first_word_) in s][0]
-            try:
-                html_page = urlopen(urllib.parse.quote(str(var_b[index_b]),safe=':/.%'))
-            except OSError as e:
-                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-        except IndexError:
-            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -223,13 +241,28 @@ def country_flag_home():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_casa_input_())
+    import unidecode
+
+    unaccented_flag_list=[]
+
+    for i in flag_list:
+        j=unidecode.unidecode(i)
+        unaccented_flag_list.append(j)
+
+    my_string = str(equipo_casa_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
+    print(flag_list)
+    print(first_word)
+    print(unaccented_flag_list)
+    print(unaccented_first_word)
+
     try:
-        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-        flag_ht = flag_list[index]
+        index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
+        flag_ht=flag_list[index]
         return flag_ht
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
@@ -243,31 +276,57 @@ def print_team_logo_home():
 
 def club_logo_road():
     try:
-        from googlesearch import search
+        from wikipedia import search
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query =  wikipedia.search(str(equipo_visita_input)+" "+str("football club"))
 
-    var_c=[]
+    print(query)
 
-    for j in search(query, num=1, stop=1, pause=2):
+    var_c_ = []
+
+    for i in query:
+        j=i.replace(" ","_")
+        var_c_.append(j)
+    print(str(var_c_))
+
+    var_c = []
+
+    for b in var_c_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        j=urllib.parse.quote(a,safe=':/.%')
         var_c.append(j)
-    print(str(var_c))
+    print (var_c)
+
+    var_c_unquote = []
+
+    for b in var_c_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        var_c_unquote.append(a)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
+    import unidecode
 
-    my_string_=str(equipo_visita_input_())
-    first_word_ = my_string_.split()[0]
+    my_string_=str(equipo_visita_input)
+    first_word_coded = my_string_.split()[0]
+
+    first_word_=unidecode.unidecode(first_word_coded)
+
+    var_c_unidecoded = []
+
+    for i in var_c_unquote:
+        j=unidecode.unidecode(i)
+        var_c_unidecoded.append(j)
 
     if len(var_c)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            index_c = [idx for idx, s in enumerate(var_c) if str(first_word_) in s][0]
+            index_c = [idx for idx, s in enumerate(var_c_unidecoded) if str(first_word_) in s][0]
             try:
-                html_page = urlopen(urllib.parse.quote(str(var_c[index_c]),safe=':/.%'))
+                html_page = urlopen(str(var_c[index_c]))
             except OSError as e:
                 html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
         except IndexError:
@@ -279,50 +338,49 @@ def club_logo_road():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" in k]
 
-    my_string = str(equipo_visita_input_())
+    unquoted_logo_list=[]
+
+    for i in logo_list:
+        j=urllib.parse.unquote(i)
+        unquoted_logo_list.append(j)
+
+    unaccented_logo_list=[]
+
+    for i in unquoted_logo_list:
+        j=unidecode.unidecode(i)
+        unaccented_logo_list.append(j)
+
+    my_string = str(equipo_visita_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
+    print(logo_list)
+    print(first_word)
+    print(unaccented_logo_list)
+    print(unaccented_first_word)
+
     try:
-        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-        logo_rt = logo_list[index]
+        index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
+        logo_rt=logo_list[index]
         return logo_rt
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_road():
+    equipo_visita_input_ = equipo_visita_input.replace(" ","_")
+
+    var_d_="https://commons.wikimedia.org/wiki/"+str(equipo_visita_input_)
+
+    var_d=urllib.parse.quote(var_d_,safe=':/.%')
+
     try:
-        from googlesearch import search
-    except ImportError:
-        st.write('No module named google found')
-
-    query = "'Flag of " + equipo_visita_input_() + "'" + " File AND svg AND wikipedia AND commons"
-
-    var_d=[]
-
-    for j in search(query, num=1, stop=1, pause=2):
-        var_d.append(j)
-    print(str(var_d))
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    my_string_=str(equipo_visita_input_())
-    first_word_ = my_string_.split()[0]
-
-    if len(var_d)==0:
+        html_page = urlopen(str(var_d))
+    except OSError as e:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-    else:
-        try:
-            index_d = [idx for idx, s in enumerate(var_d) if str(first_word_) in s][0]
-            try:
-                html_page = urlopen(urllib.parse.quote(str(var_d[index_d]),safe=':/.%'))
-            except OSError as e:
-                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-        except IndexError:
-            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
@@ -332,13 +390,28 @@ def country_flag_road():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_visita_input_())
+    import unidecode
+
+    unaccented_flag_list=[]
+
+    for i in flag_list:
+        j=unidecode.unidecode(i)
+        unaccented_flag_list.append(j)
+
+    my_string = str(equipo_visita_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
+    print(flag_list)
+    print(first_word)
+    print(unaccented_flag_list)
+    print(unaccented_first_word)
+
     try:
-        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-        flag_rt = flag_list[index]
+        index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
+        flag_rt=flag_list[index]
         return flag_rt
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
@@ -375,22 +448,25 @@ try:
     with col2:
         st.write(equipo_casa_input)
     with mid2:
-        st.write("contra")
+        st.markdown("contra")
     with col3:
         try:
             st.image(logo_road(), width=60)
         except OSError as e:
             st.image("https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg",width=60)
     with col4:
-        st.write(equipo_visita_input)
+        st.markdown(equipo_visita_input)
 except TypeError:
-    st.text("Por favor seleccioná equipos")
+    st.markdown("Por favor seleccioná equipos")
 
 st.write("Simulación de partido")
 
+latest_iteration3 = st.empty()
+bar3= st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration3.markdown(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
+    bar3.progress(i+1)
     time.sleep(0.1)
 
 try:
@@ -432,9 +508,12 @@ with col10:
 with col12:
     st.write(goles_esperados_equipo_visita_redondeado)
 
+latest_iteration4 = st.empty()
+bar4 = st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Simulando 10 000 partidos entre los equipos. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration4.markdown(f'Simulando 10 000 partidos entre los equipos. Porcentaje completado {i+1}')
+    bar4.progress(i+1)
     time.sleep(0.1)
 
 probabilidad_casa = [random.random()]
@@ -517,13 +596,14 @@ datalinea_partido_grafico= alt.Chart(datalinea_partido).mark_line().encode(
                                'blue'])
                     )
 ).properties(
-    width=900,
-    height=500
 )
 
+latest_iteration5 = st.empty()
+bar5 = st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration5.markdown(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
+    bar5.progress(i+1)
     time.sleep(0.1)
 
 st.altair_chart(datalinea_partido_grafico)
@@ -532,9 +612,9 @@ etiquetas = equipo_casa_input + ' gana', equipo_visita_input + ' gana', 'Empate'
 proporciones = [results.count("equipo de casa gana"), results.count("equipo de visita gana"), results.count("empate")]
 colores = ['green', 'red', 'gold']
 
-st.text(equipo_casa_gana)
-st.text(equipo_visita_gana)
-st.text(empate)
+st.markdown(equipo_casa_gana)
+st.markdown(equipo_visita_gana)
+st.markdown(empate)
 
 fig1, ax1 = plt.subplots()
 ax1.pie(proporciones, labels=etiquetas, colors=colores, autopct='%1.1f%%',
@@ -818,15 +898,37 @@ st.pyplot(fig2)
 # Define forecast algorithm in a function.
 # Forecast as a winner the team that has more victories and more than 40 % of the victories in the simulations.
 
+latest_iteration6 = st.empty()
+bar6 = st.progress(0)
+
 for i in range(100):
-    latest_iteration.text(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
-    bar.progress(i+1)
+    latest_iteration6.markdown(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
+    bar6.progress(i+1)
     time.sleep(0.1)
 
+from scipy.stats import chi2
+
+expected = [3333,3334,3333]
+
+simulated=[results.count("equipo de casa gana"),results.count("empate"),results.count("equipo de visita gana")]
+
+x = sum([(o-e)**2./e for o,e in zip(simulated,expected)])
+
+import scipy
+
+alpha = 0.5
+
+df = 2
+
+cr=chi2.ppf(q=1-alpha,df=df)
+
 def forecast():
-    if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000) and ((results.count("equipo de casa gana")) / 10000) > (0.4): return(str(equipo_casa_input) + " gana:")
-    elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000) and ((results.count("equipo de visita gana")) / 10000) > (0.4): return(str(equipo_visita_input) + " gana:")
-    else: return("el partido termina en un empate:")
+    if x>cr:
+        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_casa_input) + " gana:")
+        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_visita_input) + " gana:")
+        else: return("el partido termina en un empate:")
+    else:
+        return("el partido termina en un empate:")
 
 Results = results
 Scores = random_marcadores_partido
@@ -840,28 +942,33 @@ scores_home_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.
 scores_road_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "equipo de visita gana"]
 scores_tie = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "empate"]
 
-idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().idxmax()
-idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().idxmax()
-idxmax_score_tie = scores_tie['Scores'].value_counts().idxmax()
+idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().sort_index().idxmax()
+idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().sort_index().idxmax()
+idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
-    if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000) and (
-            (results.count("equipo de casa gana")) / 10000) > (0.4):
-        return(idxmax_score_home_team_wins)
-    elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000) and (
-            (results.count("equipo de visita gana")) / 10000) > (0.4):
-        return(idxmax_score_road_team_wins)
+    if x>cr:
+        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and (
+                (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000):
+            return(idxmax_score_home_team_wins)
+        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and (
+                (results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000):
+            return(idxmax_score_road_team_wins)
+        else:
+            return(idxmax_score_tie)
     else:
         return(idxmax_score_tie)
 
-st.sidebar.subheader("Resultado de las simulaciones")
+st.subheader("Resultado de las simulaciones")
 
-st.sidebar.text("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+st.markdown("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
 
-st.text("Los datos de la simulación provienen del repositorio público de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
+st.subheader("Fuentes")
+
+st.markdown("Los datos de la simulación provienen del repositorio público actualizado de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
-st.text("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
+st.markdown("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
 link2='Wikipedia [link](https://www.Wikipedia.org)'
 st.markdown(link2,unsafe_allow_html=True)
