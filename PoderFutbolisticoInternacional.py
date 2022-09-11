@@ -161,7 +161,7 @@ def club_logo_home():
     my_string_=str(equipo_casa_input)
     first_word_coded = ''
     for character in my_string_:
-        if character != '/' and character !=' ':
+        if character != '/' and character !=' ' and character !='-':
             first_word_coded = first_word_coded + character
         else:
             break
@@ -209,7 +209,7 @@ def club_logo_home():
     my_string=str(equipo_casa_input)
     first_word = ''
     for character in my_string:
-        if character != '/' and character !=' ':
+        if character != '/' and character !=' ' and character !='-':
             first_word = first_word + character
         else:
             break
@@ -315,7 +315,7 @@ def club_logo_road():
     my_string_=str(equipo_visita_input)
     first_word_coded = ''
     for character in my_string_:
-        if character != '/' and character !=' ':
+        if character != '/' and character !=' ' and character !='-':
             first_word_coded = first_word_coded + character
         else:
             break
@@ -363,7 +363,7 @@ def club_logo_road():
     my_string=str(equipo_visita_input)
     first_word = ''
     for character in my_string:
-        if character != '/' and character !=' ':
+        if character != '/' and character !=' ' and character !='-':
             first_word = first_word + character
         else:
             break
