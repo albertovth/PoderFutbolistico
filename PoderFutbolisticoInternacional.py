@@ -261,6 +261,8 @@ def country_flag_home():
         images.append(img.get('src'))
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
+        
+    print(flag_list)
 
     import unidecode
 
@@ -282,6 +284,8 @@ def country_flag_home():
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
+    print(flag_ht)
+    
 def print_team_logo_home():
     if spi_global_rankings['name'].str.contains(str(equipo_casa_input)).any():
         return club_logo_home()
