@@ -127,7 +127,7 @@ def club_logo_home():
     except ImportError:
         print('No module named google found')
 
-    query =  wikipedia.search(str(equipo_casa_input)+" "+str("football club"))
+    query =  wikipedia.search(str(equipo_casa_input)+" "+"football club")
 
     print(query)
 
@@ -268,7 +268,7 @@ def club_logo_road():
     except ImportError:
         print('No module named google found')
 
-    query =  wikipedia.search(str(equipo_visita_input)+" "+str("football club"))
+    query =  wikipedia.search(str(equipo_visita_input)+" "+"football club")
 
     print(query)
 
