@@ -159,10 +159,10 @@ def club_logo_home():
     import unidecode
 
     my_string_=str(equipo_casa_input)
-    first_word_ = ''
+    first_word_coded = ''
     for character in my_string_:
         if character != '/' and character !=' ':
-            first_word_ = first_word_ + character
+            first_word_coded = first_word_coded + character
         else:
             break
 
@@ -313,10 +313,10 @@ def club_logo_road():
     import unidecode
 
     my_string_=str(equipo_visita_input)
-    first_word_ = ''
+    first_word_coded = ''
     for character in my_string_:
         if character != '/' and character !=' ':
-            first_word_ = first_word_ + character
+            first_word_coded = first_word_coded + character
         else:
             break
 
