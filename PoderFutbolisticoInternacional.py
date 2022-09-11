@@ -159,7 +159,12 @@ def club_logo_home():
     import unidecode
 
     my_string_=str(equipo_casa_input)
-    first_word_coded = my_string_.split()[0]
+    first_word_ = ''
+    for character in my_string_:
+        if character != '/' and character !=' ':
+            first_word_ = first_word_ + character
+        else:
+            break
 
     first_word_=unidecode.unidecode(first_word_coded)
 
@@ -201,16 +206,15 @@ def club_logo_home():
         j=unidecode.unidecode(i)
         unaccented_logo_list.append(j)
 
-    my_string = str(equipo_casa_input)
-
-    first_word = my_string.split()[0]
+    my_string=str(equipo_casa_input)
+    first_word = ''
+    for character in my_string:
+        if character != '/' and character !=' ':
+            first_word = first_word + character
+        else:
+            break
 
     unaccented_first_word = unidecode.unidecode(first_word)
-
-    print(logo_list)
-    print(first_word)
-    print(unaccented_logo_list)
-    print(unaccented_first_word)
 
     try:
         index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
@@ -249,16 +253,15 @@ def country_flag_home():
         j=unidecode.unidecode(i)
         unaccented_flag_list.append(j)
 
-    my_string = str(equipo_casa_input)
-
-    first_word = my_string.split()[0]
+    my_string=str(equipo_casa_input)
+    first_word = ''
+    for character in my_string:
+        if character != '/' and character !=' ':
+            first_word = first_word + character
+        else:
+            break
 
     unaccented_first_word = unidecode.unidecode(first_word)
-
-    print(flag_list)
-    print(first_word)
-    print(unaccented_flag_list)
-    print(unaccented_first_word)
 
     try:
         index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
@@ -310,7 +313,12 @@ def club_logo_road():
     import unidecode
 
     my_string_=str(equipo_visita_input)
-    first_word_coded = my_string_.split()[0]
+    first_word_ = ''
+    for character in my_string_:
+        if character != '/' and character !=' ':
+            first_word_ = first_word_ + character
+        else:
+            break
 
     first_word_=unidecode.unidecode(first_word_coded)
 
@@ -352,16 +360,15 @@ def club_logo_road():
         j=unidecode.unidecode(i)
         unaccented_logo_list.append(j)
 
-    my_string = str(equipo_visita_input)
-
-    first_word = my_string.split()[0]
+    my_string=str(equipo_visita_input)
+    first_word = ''
+    for character in my_string:
+        if character != '/' and character !=' ':
+            first_word = first_word + character
+        else:
+            break
 
     unaccented_first_word = unidecode.unidecode(first_word)
-
-    print(logo_list)
-    print(first_word)
-    print(unaccented_logo_list)
-    print(unaccented_first_word)
 
     try:
         index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
@@ -398,16 +405,15 @@ def country_flag_road():
         j=unidecode.unidecode(i)
         unaccented_flag_list.append(j)
 
-    my_string = str(equipo_visita_input)
-
-    first_word = my_string.split()[0]
+    my_string=str(equipo_visita_input)
+    first_word = ''
+    for character in my_string:
+        if character != '/' and character !=' ':
+            first_word = first_word + character
+        else:
+            break
 
     unaccented_first_word = unidecode.unidecode(first_word)
-
-    print(flag_list)
-    print(first_word)
-    print(unaccented_flag_list)
-    print(unaccented_first_word)
 
     try:
         index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
