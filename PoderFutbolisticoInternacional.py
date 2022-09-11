@@ -121,85 +121,59 @@ for i in range(100):
     bar2.progress(i+1)
     time.sleep(0.1)
 
-def equipo_casa_input_():
-    if equipo_casa_input == "Lille":
-        return "LOSC"
-    elif equipo_casa_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_casa_input == "USA":
-        return "United States"
-    elif equipo_casa_input == "England":
-        return "England England England"
-    elif equipo_casa_input == "Liverpool":
-        return "Liverpool Football Club"
-    elif equipo_casa_input == "Mexico":
-        return "Mexico Mexico National Symbols"
-    elif equipo_casa_input == "Manchester United":
-        return "Manchester United football club crest"
-    elif equipo_casa_input == "Brazil":
-        return "Brazil national symbols"
-    elif equipo_casa_input == "Sevilla FC":
-        return "Sevilla Sevilla Sevilla Fútbol Club Spanish professional soccer team"
-    elif equipo_casa_input == "Tijuana":
-        return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
-    elif equipo_casa_input == "DC United":
-        return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
-    else:
-        return equipo_casa_input
-
-def equipo_visita_input_():
-    if equipo_visita_input == "Lille":
-        return "LOSC"
-    elif equipo_visita_input == "Lyon":
-        return "Olympique Lyonnais datei"
-    elif equipo_visita_input == "USA":
-        return "United States"
-    elif equipo_visita_input == "England":
-        return "England England England"
-    elif equipo_visita_input == "Liverpool":
-        return "Liverpool Football Club"
-    elif equipo_visita_input == "Mexico":
-        return "Mexico Mexico National Symbols"
-    elif equipo_visita_input == "Manchester United":
-        return "Manchester United football club crest"
-    elif equipo_visita_input == "Brazil":
-        return "Brazil national symbols"
-    elif equipo_visita_input == "Sevilla FC":
-        return "Sevilla Sevilla Sevilla Fútbol Club Spanish professional soccer team"
-    elif equipo_visita_input == "Tijuana":
-        return "Club Tijuana Xoloitzcuintles de Caliente soccer team"
-    elif equipo_visita_input == "DC United":
-        return "D.C. United is a professional soccer club based in Washington, D.C. that competes in the Eastern Conference of Major League Soccer"
-    else:
-        return equipo_visita_input
-
 def club_logo_home():
     try:
-        from googlesearch import search
+        from wikipedia import search
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_casa_input_() + " AND Wikipedia AND .svg"
+    query =  wikipedia.search(str(equipo_casa_input)+" "+str("football club"))
+
+    print(query)
+
+    var_a_ = []
+
+    for i in query:
+        j=i.replace(" ","_")
+        var_a_.append(j)
+    print(str(var_a_))
 
     var_a = []
 
-    for j in search(query, num=1, stop=1, pause=2):
+    for b in var_a_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        j=urllib.parse.quote(a,safe=':/.%')
         var_a.append(j)
-    print(str(var_a))
+    print (var_a)
+
+    var_a_unquote = []
+
+    for b in var_a_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        var_a_unquote.append(a)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
+    import unidecode
 
-    my_string_=str(equipo_casa_input_())
-    first_word_ = my_string_.split()[0]
+    my_string_=str(equipo_casa_input)
+    first_word_coded = my_string_.split()[0]
+
+    first_word_=unidecode.unidecode(first_word_coded)
+
+    var_a_unidecoded = []
+
+    for i in var_a_unquote:
+        j=unidecode.unidecode(i)
+        var_a_unidecoded.append(j)
 
     if len(var_a)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            index_a = [idx for idx, s in enumerate(var_a) if str(first_word_) in s][0]
+            index_a = [idx for idx, s in enumerate(var_a_unidecoded) if str(first_word_) in s][0]
             try:
-                html_page = urlopen(urllib.parse.quote(str(var_a[index_a]),safe=':/.%'))
+                html_page = urlopen(str(var_a[index_a]))
             except OSError as e:
                 html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
         except IndexError:
@@ -213,48 +187,45 @@ def club_logo_home():
 
     logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" in k]
 
-    my_string = str(equipo_casa_input_())
+    unquoted_logo_list=[]
+
+    for i in logo_list:
+        j=urllib.parse.unquote(i)
+        unquoted_logo_list.append(j)
+
+    unaccented_logo_list=[]
+
+    for i in unquoted_logo_list:
+        j=unidecode.unidecode(i)
+        unaccented_logo_list.append(j)
+
+    my_string = str(equipo_casa_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
     try:
-        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-        logo_ht = logo_list[index]
+        index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
+        logo_ht=logo_list[index]
         return logo_ht
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_home():
+
+    equipo_casa_input_ = equipo_casa_input.replace(" ","_")
+
+    var_b_="https://commons.wikimedia.org/wiki/"+str(equipo_casa_input_)
+
+    var_b=urllib.parse.quote(var_b_,safe=':/.%')
+
     try:
-        from googlesearch import search
-    except ImportError:
-        print('No module named google found')
-
-    query = "'Flag of " + equipo_casa_input_() + "'" + " File AND svg AND wikipedia AND commons"
-
-    var_b = []
-
-    for j in search(query, num=1, stop=1, pause=2):
-        var_b.append(j)
-    print(str(var_b))
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    my_string_=str(equipo_casa_input_())
-    first_word_ = my_string_.split()[0]
-
-    if len(var_b)==0:
+        html_page = urlopen(str(var_b))
+    except OSError as e:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-    else:
-        try:
-            index_b = [idx for idx, s in enumerate(var_b) if str(first_word_) in s][0]
-            try:
-                html_page = urlopen(urllib.parse.quote(str(var_b[index_b]),safe=':/.%'))
-            except OSError as e:
-                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-        except IndexError:
-            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
+
+
     soup = bs(html_page, features='html.parser')
     images = []
 
@@ -263,13 +234,23 @@ def country_flag_home():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_casa_input_())
+    import unidecode
+
+    unaccented_flag_list=[]
+
+    for i in flag_list:
+        j=unidecode.unidecode(i)
+        unaccented_flag_list.append(j)
+
+    my_string = str(equipo_casa_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
     try:
-        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-        flag_ht = flag_list[index]
+        index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
+        flag_ht=flag_list[index]
         return flag_ht
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
@@ -283,31 +264,57 @@ def print_team_logo_home():
 
 def club_logo_road():
     try:
-        from googlesearch import search
+        from wikipedia import search
     except ImportError:
         print('No module named google found')
 
-    query = "File OR Datei OR Fichier AND FC OR SL OR CD AND " + equipo_visita_input_() + " AND Wikipedia AND .svg"
+    query =  wikipedia.search(str(equipo_visita_input)+" "+str("football club"))
 
-    var_c=[]
+    print(query)
 
-    for j in search(query, num=1, stop=1, pause=2):
+    var_c_ = []
+
+    for i in query:
+        j=i.replace(" ","_")
+        var_c_.append(j)
+    print(str(var_c_))
+
+    var_c = []
+
+    for b in var_c_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        j=urllib.parse.quote(a,safe=':/.%')
         var_c.append(j)
-    print(str(var_c))
+    print (var_c)
+
+    var_c_unquote = []
+
+    for b in var_c_:
+        a="https://en.wikipedia.org/wiki/"+str(b)
+        var_c_unquote.append(a)
 
     from bs4 import BeautifulSoup as bs
     from urllib.request import urlopen
+    import unidecode
 
-    my_string_=str(equipo_visita_input_())
-    first_word_ = my_string_.split()[0]
+    my_string_=str(equipo_visita_input)
+    first_word_coded = my_string_.split()[0]
+
+    first_word_=unidecode.unidecode(first_word_coded)
+
+    var_c_unidecoded = []
+
+    for i in var_c_unquote:
+        j=unidecode.unidecode(i)
+        var_c_unidecoded.append(j)
 
     if len(var_c)==0:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            index_c = [idx for idx, s in enumerate(var_c) if str(first_word_) in s][0]
+            index_c = [idx for idx, s in enumerate(var_c_unidecoded) if str(first_word_) in s][0]
             try:
-                html_page = urlopen(urllib.parse.quote(str(var_c[index_c]),safe=':/.%'))
+                html_page = urlopen(str(var_c[index_c]))
             except OSError as e:
                 html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
         except IndexError:
@@ -321,48 +328,42 @@ def club_logo_road():
 
     logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" in k]
 
-    my_string = str(equipo_visita_input_())
+    unquoted_logo_list=[]
+
+    for i in logo_list:
+        j=urllib.parse.unquote(i)
+        unquoted_logo_list.append(j)
+
+    unaccented_logo_list=[]
+
+    for i in unquoted_logo_list:
+        j=unidecode.unidecode(i)
+        unaccented_logo_list.append(j)
+
+    my_string = str(equipo_visita_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
     try:
-        index = [idx for idx, s in enumerate(logo_list) if str(first_word) in s][0]
-        logo_rt = logo_list[index]
+        index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
+        logo_rt=logo_list[index]
         return logo_rt
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def country_flag_road():
+    equipo_visita_input_ = equipo_visita_input.replace(" ","_")
+
+    var_d_="https://commons.wikimedia.org/wiki/"+str(equipo_visita_input_)
+
+    var_d=urllib.parse.quote(var_d_,safe=':/.%')
+
     try:
-        from googlesearch import search
-    except ImportError:
-        st.write('No module named google found')
-
-    query = "'Flag of " + equipo_visita_input_() + "'" + " File AND svg AND wikipedia AND commons"
-
-    var_d=[]
-
-    for j in search(query, num=1, stop=1, pause=2):
-        var_d.append(j)
-    print(str(var_d))
-
-    from bs4 import BeautifulSoup as bs
-    from urllib.request import urlopen
-
-    my_string_=str(equipo_visita_input_())
-    first_word_ = my_string_.split()[0]
-
-    if len(var_d)==0:
+        html_page = urlopen(str(var_d))
+    except OSError as e:
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-    else:
-        try:
-            index_d = [idx for idx, s in enumerate(var_d) if str(first_word_) in s][0]
-            try:
-                html_page = urlopen(urllib.parse.quote(str(var_d[index_d]),safe=':/.%'))
-            except OSError as e:
-                html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
-        except IndexError:
-            html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
 
     soup = bs(html_page, features='html.parser')
     images = []
@@ -372,17 +373,27 @@ def country_flag_road():
 
     flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
 
-    my_string = str(equipo_visita_input_())
+    import unidecode
+
+    unaccented_flag_list=[]
+
+    for i in flag_list:
+        j=unidecode.unidecode(i)
+        unaccented_flag_list.append(j)
+
+    my_string = str(equipo_visita_input)
 
     first_word = my_string.split()[0]
 
+    unaccented_first_word = unidecode.unidecode(first_word)
+
     try:
-        index = [idx for idx, s in enumerate(flag_list) if str(first_word) in s][0]
-        flag_rt = flag_list[index]
+        index = [idx for idx, s in enumerate(unaccented_flag_list) if str(unaccented_first_word) in s][0]
+        flag_rt=flag_list[index]
         return flag_rt
     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
-
+    
 def print_team_logo_road():
     if spi_global_rankings['name'].str.contains(str(equipo_visita_input)).any():
         return club_logo_road()
