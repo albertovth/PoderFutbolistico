@@ -348,7 +348,7 @@ def equipo_casa_input_():
     else:
         return equipo_casa_input
     
-    def equipo_visita_input_():
+def equipo_visita_input_():
 
     if equipo_visita_input == 'Afghanistan': return 'File:Flag_of_Afghanistan.svg'
     elif equipo_visita_input == 'Albania': return 'File:Flag_of_Albania.svg'
