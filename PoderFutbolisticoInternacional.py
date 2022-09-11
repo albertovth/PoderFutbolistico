@@ -928,7 +928,7 @@ x = sum([(o-e)**2./e for o,e in zip(simulated,expected)])
 
 import scipy
 
-alpha = 0.5
+alpha = 0.05
 
 df = 2
 
