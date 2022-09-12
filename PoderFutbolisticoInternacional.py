@@ -271,7 +271,7 @@ def country_flag_home():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
+    flag_list: List[Any] = [k for k in images if "Flag_of_" or "Coat_of_arms" in k]
         
     print(flag_list)
 
@@ -420,7 +420,7 @@ def country_flag_road():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    flag_list: List[Any] = [k for k in images if "Flag_of_" in k]
+    flag_list: List[Any] = [k for k in images if "Flag_of_" or "Coat_of_arms" in k]
 
     import unidecode
 
