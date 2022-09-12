@@ -298,7 +298,7 @@ def country_flag_home():
     print(flag_ht)
     
 def print_team_logo_home():
-    if countries_df['countries'].str.contains(str(equipo_casa_input_())).any():
+    if countries_df['countries'].eq(str(equipo_casa_input_())).any():
         return country_flag_home()
     else:
         return club_logo_home()
@@ -443,7 +443,7 @@ def country_flag_road():
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
 def print_team_logo_road():
-    if countries_df['countries'].str.contains(str(equipo_visita_input_())).any():
+    if countries_df['countries'].eq(str(equipo_visita_input_())).any():
         return country_flag_road()
     else:
         return club_logo_road()
