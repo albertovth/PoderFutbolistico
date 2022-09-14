@@ -934,13 +934,12 @@ for i in range(100):
 
 from scipy.stats import chi2
 
-expected = [3333,3334,3333]
-
 simulated=[results.count("equipo de casa gana"),results.count("empate"),results.count("equipo de visita gana")]
 
-x = sum([(o-e)**2./e for o,e in zip(simulated,expected)])
+simulations =list(range(1,5000))
 
 import scipy
+from scipy.stats import chi2
 
 alpha = 0.05
 
@@ -948,8 +947,47 @@ df = 2
 
 cr=chi2.ppf(q=1-alpha,df=df)
 
+x_list=[]
+
+
+expected_a= [[(10000-(2*i)),(10000-(2*i)),i] for i in simulations]
+
+for i in expected_a:
+    x_a = sum([(o-e)**2./e for o,e in zip(simulated,i)])
+    x_list.append(x_a)
+
+expected_b = [[(10000-(2*i)),i,(10000-(2*i))] for i in simulations]
+ 
+for j in expected_b:
+    x_b = sum([(o-e)**2./e for o,e in zip(simulated,j)])
+    x_list.append(x_b)
+
+expected_c = [[i,(10000-(2*i)),(10000-(2*i))] for i in simulations]
+
+for k in expected_c:
+    x_c = sum([(o-e)**2./e for o,e in zip(simulated,k)])
+    x_list.append(x_c)
+
+expected_d= [[(10000-(2*i)),i,i] for i in simulations]
+
+for l in expected_d:
+    x_d = sum([(o-e)**2./e for o,e in zip(simulated,l)])
+    x_list.append(x_d)
+
+expected_e= [[i,(10000-(2*i)),i] for i in simulations]
+
+for m in expected_e:
+    x_e = sum([(o-e)**2./e for o,e in zip(simulated,m)])
+    x_list.append(x_e)
+
+expected_f= [[i,i,(10000-(2*i))] for i in simulations]
+
+for n in expected_f:
+    x_f = sum([(o-e)**2./e for o,e in zip(simulated,n)])
+    x_list.append(x_f)
+
 def forecast():
-    if x>cr:
+    if all(i>cr for i in x_list):
         if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_casa_input) + " gana:")
         elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_visita_input) + " gana:")
         else: return("el partido termina en un empate:")
@@ -973,7 +1011,7 @@ idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().sor
 idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
-    if x>cr:
+    if all(i>cr for i in x_list):
         if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and (
                 (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000):
             return(idxmax_score_home_team_wins)
