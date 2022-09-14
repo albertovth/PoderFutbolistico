@@ -942,7 +942,6 @@ simulations_=[]
 for i in simulations:
   j=2*i
   simulations_.append(j)
-print(simulations)
 
 import scipy
 from scipy.stats import chi2
