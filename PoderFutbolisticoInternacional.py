@@ -222,7 +222,7 @@ def club_logo_home():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" or "Escudo" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" or "Escudo" or "svg" in k]
 
     unquoted_logo_list=[]
 
@@ -372,7 +372,7 @@ def club_logo_road():
     for img in soup.findAll('img'):
         images.append(img.get('src'))
 
-    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" or "Escudo" in k]
+    logo_list: List[Any] = [k for k in images if "https" and "logo" or "badge" or "crest" or "FC" or "CF" or "CD" or "Escudo" or "svg" in k]
 
     unquoted_logo_list=[]
 
