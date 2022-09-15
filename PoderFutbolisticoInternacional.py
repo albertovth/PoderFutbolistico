@@ -196,7 +196,7 @@ def club_logo_home():
         else:
             break
 
-    first_word_=unidecode.unidecode(first_word_coded)
+    my_string_unidecoded=unidecode.unidecode(my_string_)
 
     var_a_unidecoded = []
 
@@ -208,7 +208,7 @@ def club_logo_home():
         html_page = urlopen("https://commons.wikimedia.org/wiki/File:No_image_available.svg")
     else:
         try:
-            index_a = [idx for idx, s in enumerate(var_a_unidecoded) if str(first_word_) in s][0]
+            index_a = [idx for idx, s in enumerate(var_a_unidecoded) if any(word in my_string_unidecoded) in s][0]
             try:
                 html_page = urlopen(str(var_a[index_a]))
             except OSError as e:
@@ -244,10 +244,10 @@ def club_logo_home():
         else:
             break
 
-    unaccented_first_word = unidecode.unidecode(first_word)
+    unaccented_my_string = unidecode.unidecode(my_string)
 
     try:
-        index = [idx for idx, s in enumerate(unaccented_logo_list) if str(unaccented_first_word) in s][0]
+        index = [idx for idx, s in enumerate(unaccented_logo_list) if any(word in unaccented_my_string) in s][0]
         logo_ht=logo_list[index]
         return logo_ht
     except IndexError:
