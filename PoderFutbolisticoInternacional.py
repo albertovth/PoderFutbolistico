@@ -946,7 +946,7 @@ for i in simulations:
 import scipy
 from scipy.stats import chi2
 
-alpha = 0.05
+alpha = 0.1
 
 df = 2
 
