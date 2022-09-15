@@ -248,7 +248,7 @@ def club_logo_home():
         else:
             break
 
-    unaccented_my_string = unidecode.unidecode(my_string)
+    my_string_unaccented = unidecode.unidecode(my_string)
     
     my_string_unaccented_list=[]
     
