@@ -208,7 +208,8 @@ def country_flag_home():
         flag_ht=flag_list[index]
         return flag_ht
     except IndexError:
-        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        flag_ht="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        return flag_ht
 
     print(flag_ht)
     
@@ -266,7 +267,8 @@ def country_flag_road():
         flag_rt=flag_list[index]
         return flag_rt
     except IndexError:
-        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        flag_rt = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        return flag_rt
 
 def print_team_logo_road():
     if countries_df['countries'].eq(str(equipo_visita_input_())).any():
