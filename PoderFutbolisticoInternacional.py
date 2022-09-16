@@ -820,8 +820,8 @@ for n in expected_f:
 
 def forecast():
     if all(i>cr for i in x_list):
-        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_casa_input) + " gana:")
-        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000): return(str(equipo_visita_input) + " gana:")
+        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000)+0.02: return(str(equipo_casa_input) + " gana:")
+        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000)+0.02: return(str(equipo_visita_input) + " gana:")
         else: return("el partido termina en un empate:")
     else:
         return("el partido termina en un empate:")
@@ -845,10 +845,10 @@ idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 def score_forecast():
     if all(i>cr for i in x_list):
         if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and (
-                (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000):
+                (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000)+0.02:
             return(idxmax_score_home_team_wins)
         elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and (
-                (results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000):
+                (results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000)+0.02:
             return(idxmax_score_road_team_wins)
         else:
             return(idxmax_score_tie)
