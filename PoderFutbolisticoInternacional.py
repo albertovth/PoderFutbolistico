@@ -332,9 +332,9 @@ try:
     goles_esperados_equipo_casa = ((equipo_casa_of) + (equipo_visita_def)) / 2
     goles_esperados_equipo_visita = ((equipo_visita_of) + (equipo_casa_def)) / 2
 
-    goles_esperados_equipo_casa_redondeado = math.ceil(goles_esperados_equipo_casa * 100) / 100.0)
+    goles_esperados_equipo_casa_redondeado = (math.ceil(goles_esperados_equipo_casa * 100) / 100.0)
 
-    goles_esperados_equipo_visita_redondeado = math.ceil(goles_esperados_equipo_visita * 100) / 100.0)
+    goles_esperados_equipo_visita_redondeado = (math.ceil(goles_esperados_equipo_visita * 100) / 100.0)
 
 except IndexError:
     goles_esperados_equipo_casa_redondeado = 1
