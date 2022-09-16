@@ -109,4 +109,4 @@ webencodings==0.5.1
 widgetsnbextension==3.5.1
 wikipedia~=1.4.0
 xlrd==2.0.1
-math==0.0.1
+python-math==0.0.1
