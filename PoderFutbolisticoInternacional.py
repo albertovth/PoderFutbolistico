@@ -224,7 +224,7 @@ def club_logo_road():
      except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
-    print(logo_rt)
+     print(logo_rt)
 
 def country_flag_road():
  
