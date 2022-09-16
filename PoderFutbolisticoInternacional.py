@@ -163,7 +163,8 @@ def club_logo_home():
         logo_ht=logos[l]
         return logo_ht
     except IndexError:
-        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        logo_ht="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        return logo_ht
 
     print(logo_ht)
 
@@ -223,7 +224,8 @@ def club_logo_road():
         logo_rt=logos[l]
         return logo_rt
      except IndexError:
-        return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        logo_rt = "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
+        return logo_rt
 
      print(logo_rt)
 
