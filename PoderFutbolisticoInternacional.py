@@ -221,7 +221,7 @@ def club_logo_road():
         l=clubs.index(str(equipo_visita_input_()))
         logo_rt=logos[l]
         return logo_rt
-    except IndexError:
+     except IndexError:
         return "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
 
     print(logo_rt)
