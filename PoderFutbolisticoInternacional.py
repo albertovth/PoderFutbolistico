@@ -782,37 +782,37 @@ cr=chi2.ppf(q=1-alpha,df=df)
 
 x_list=[]
 
-expected_a= [[(5000-(i/2)),(5000-(i/2)),i] for i in simulations_ if i<5000]
+expected_a= [[(5000-(i/2)),(5000-(i/2)),i] for i in simulations_ if i<3334]
 
 for i in expected_a:
     x_a = sum([(o-e)**2./e for o,e in zip(simulated,i)])
     x_list.append(x_a)
 
-expected_b = [[(5000-(i/2)),i,(5000-(i/2))] for i in simulations_ if i<5000]
+expected_b = [[(5000-(i/2)),i,(5000-(i/2))] for i in simulations_ if i<3334]
   
 for j in expected_b:
     x_b = sum([(o-e)**2./e for o,e in zip(simulated,j)])
     x_list.append(x_b)
 
-expected_c = [[i,(5000-(i/2)),(5000-(i/2))] for i in simulations_ if i<5000]
+expected_c = [[i,(5000-(i/2)),(5000-(i/2))] for i in simulations_ if i<3334]
 
 for k in expected_c:
     x_c = sum([(o-e)**2./e for o,e in zip(simulated,k)])
     x_list.append(x_c)
 
-expected_d= [[(10000-(2*i)),i,i] for i in simulations if i>2500]
+expected_d= [[(10000-(2*i)),i,i] for i in simulations if i>3333]
 
 for l in expected_d:
     x_d = sum([(o-e)**2./e for o,e in zip(simulated,l)])
     x_list.append(x_d)
 
-expected_e= [[i,(10000-(2*i)),i] for i in simulations if i>2500]
+expected_e= [[i,(10000-(2*i)),i] for i in simulations if i>3333]
 
 for m in expected_e:
     x_e = sum([(o-e)**2./e for o,e in zip(simulated,m)])
     x_list.append(x_e)
 
-expected_f= [[i,i,(10000-(2*i))] for i in simulations if i>2500]
+expected_f= [[i,i,(10000-(2*i))] for i in simulations if i>3333]
 
 for n in expected_f:
     x_f = sum([(o-e)**2./e for o,e in zip(simulated,n)])
