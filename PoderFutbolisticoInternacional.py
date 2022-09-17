@@ -750,7 +750,8 @@ plt.title('Frecuencia de marcadores posibles ' + equipo_casa_input + ' contra ' 
 st.pyplot(fig2)
 
 # Define forecast algorithm in a function.
-# Forecast as a winner the team that has more victories and more than 40 % of the victories in the simulations.
+# Forecast the result that has a higher frequency, given that the multinomial distribution is significantly different from the null distributions expected_x
+# Retrieve most likely score for the result that is forecast
 
 latest_iteration6 = st.empty()
 bar6 = st.progress(0)
