@@ -441,9 +441,9 @@ marco = [datalinea_casa, datalinea_visita]
 datalinea_partido = pd.concat(marco)
 
 datalinea_partido_grafico= alt.Chart(datalinea_partido).mark_line().encode(
-    x='Resultados posibles',
-    y='Probabilidad de marcadores',
-    color=alt.Color('Equipo',
+    x='Possible match results',
+    y='Probability of each score',
+    color=alt.Color('Team',
                     scale=alt.Scale(
                         domain=[equipo_casa_input,equipo_visita_input],
                         range=['red',
