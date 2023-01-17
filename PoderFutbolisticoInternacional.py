@@ -83,7 +83,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("It is possible to select/remove the\nteams even though the system already\nhas started a simulation process,\nand even though the screen is greyed out")
+st.markdown("It is possible to select/remove the\nteams even though the system already\nhas started a simulation process\nor the system is fetching new information, and even though the screen is greyed out")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
@@ -91,7 +91,7 @@ params={
 }
 
 
-if st.button("Accept teams"):
+if st.button("Start simulation based on your selection"):
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 else:
@@ -862,7 +862,7 @@ st.markdown("After 10 000 simulations of\nthe match, and considering the lastest
 
 st.subheader("Sources")
 
-st.markdown("The data for the simulation come from the latest information in the public repository published by FiveThirtyEight\nin GitHub as the basis for their Soccer Power Index, available in:")
+st.markdown("Updated data for the simulation come from the public repository published by FiveThirtyEight\nin GitHub, as the basis for their Soccer Power Index, available at:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
