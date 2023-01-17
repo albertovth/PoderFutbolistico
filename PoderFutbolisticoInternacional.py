@@ -427,11 +427,11 @@ equipo_casa_gana = equipo_casa_input + " wins a " + str(round(((results.count("h
 equipo_visita_gana= equipo_visita_input + " wins a " + str(round(((results.count("visiting team wins") / 10000) * 100),2)) + " % of the 10 000 simulations of the match"
 empate = "The match results in a tie " + str(round(((results.count("tie") / 10000) * 100),2)) + " % of the 10 000 simulations of the match"
 
-datalinea_casa = pd.DataFrame({'Equipo':[equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input,
+datalinea_casa = pd.DataFrame({'Team':[equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input,
                                          equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input],
                                'Probabilidad de marcadores': probabilidad_marcadores_final_casa, 'Resultados posibles': resultados_posibles_equipo_casa},
                               index=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-datalinea_visita = pd.DataFrame({'Equipo':[equipo_visita_input, equipo_visita_input, equipo_visita_input, equipo_visita_input,equipo_visita_input, equipo_visita_input,
+datalinea_visita = pd.DataFrame({'Team':[equipo_visita_input, equipo_visita_input, equipo_visita_input, equipo_visita_input,equipo_visita_input, equipo_visita_input,
                                            equipo_visita_input, equipo_visita_input,equipo_visita_input, equipo_visita_input, equipo_visita_input],
                                  'Probabilidad de marcadores': probabilidad_marcadores_final_visita, 'Resultados posibles': resultados_posibles_equipo_visita},
                                 index=[12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22])
