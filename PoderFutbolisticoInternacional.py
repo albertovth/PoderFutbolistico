@@ -91,7 +91,7 @@ params={
 }
 
 
-if st.button("Start simulation based on your selection"):
+if st.button("Start simulation, based on your selection"):
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 else:
