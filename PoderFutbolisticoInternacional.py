@@ -83,7 +83,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("It is possible to select/remove the\nteams even though the system already\nhas started a simulation process\nor the system is fetching new information, and even though the screen is greyed out")
+st.markdown("It is possible to run a new\nsimulation even though the system either\nhas started a simulation process,\n the system is fetching new information or even though the screen is greyed out")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
