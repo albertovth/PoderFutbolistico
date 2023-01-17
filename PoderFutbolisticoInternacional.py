@@ -429,11 +429,11 @@ empate = "The match results in a tie " + str(round(((results.count("tie") / 1000
 
 datalinea_casa = pd.DataFrame({'Team':[equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input,
                                          equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input],
-                               'Probabilidad de marcadores': probabilidad_marcadores_final_casa, 'Resultados posibles': resultados_posibles_equipo_casa},
+                               'Probability of score': probabilidad_marcadores_final_casa, 'Possible results': resultados_posibles_equipo_casa},
                               index=[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 datalinea_visita = pd.DataFrame({'Team':[equipo_visita_input, equipo_visita_input, equipo_visita_input, equipo_visita_input,equipo_visita_input, equipo_visita_input,
                                            equipo_visita_input, equipo_visita_input,equipo_visita_input, equipo_visita_input, equipo_visita_input],
-                                 'Probabilidad de marcadores': probabilidad_marcadores_final_visita, 'Resultados posibles': resultados_posibles_equipo_visita},
+                                 'Probability of score': probabilidad_marcadores_final_visita, 'Possible results': resultados_posibles_equipo_visita},
                                 index=[12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22])
 
 marco = [datalinea_casa, datalinea_visita]
