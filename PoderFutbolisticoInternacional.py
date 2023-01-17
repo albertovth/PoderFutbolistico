@@ -845,7 +845,7 @@ idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
     if all(i>cr for i in x_list):
-        if ((results.count("home team wins")) / 10000) > ((results.count("visting team wins")) / 10000)+0.02 and (
+        if ((results.count("home team wins")) / 10000) > ((results.count("visiting team wins")) / 10000)+0.02 and (
                 (results.count("home team wins")) / 10000) > ((results.count("tie"))/10000)+0.02:
             return(idxmax_score_home_team_wins)
         elif ((results.count("visiting team wins")) / 10000) > ((results.count("home team wins")) / 10000)+0.02 and (
