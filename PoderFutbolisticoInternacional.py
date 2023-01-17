@@ -21,7 +21,7 @@ import wikipedia
 import unicodedata
 import math
 
-st.title('Predictor de Partidos de Fútbol - Clubes y Selecciones Nacionales')
+st.title('Soccer Matches Predictor - Clubs and National Teams')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -52,11 +52,11 @@ latest_iteration0= st.empty()
 bar0 = st.progress(0)
 
 for i in range(100):
-    latest_iteration0.markdown(f'Actualizando la base de datos con la información más reciente. Porcentaje completado {i+1}')
+    latest_iteration0.markdown(f'Updating the database with the latest information. Percentage completed {i+1}')
     bar0.progress(i+1)
     time.sleep(0.1)
 
-st.markdown("Podés simular partidos navegando bajo la tabla")
+st.markdown("You can simulate matches by browsing to the table presented below")
 
 @st.cache
 def load_data():
@@ -82,37 +82,37 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 # Display an interactive table
 st.dataframe(spi)
 
-st.subheader('Simular partido\nSeleccioná equipos')
-st.markdown("Es posible elegir/retirar los\nequipos aunque ya hayan iniciado\nprocesos anteriores o subsecuentes,\ny aunque la pantalla esté gris")
+st.subheader('Simulate match\nSelect teams')
+st.markdown("It is possible to select/remove the\nteams even though the system already\nhas started a simulation process,\nand even though the screen is greyed out")
 
 params={
-    'equipo_casa' : st.selectbox('Equipo de casa', Equipo_casa),
-    'equipo_visita' : st.selectbox('Equipo de visita', Equipo_visita)
+    'equipo_casa' : st.selectbox('Home team', Equipo_casa),
+    'equipo_visita' : st.selectbox('Visiting team', Equipo_visita)
 }
 
 
-if st.button("Aceptar equipos"):
+if st.button("Accept teams"):
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 else:
-    equipo_casa_input = "Ninguno"
-    equipo_visita_input = "Ninguno"
+    equipo_casa_input = "None"
+    equipo_visita_input = "None"
 
-if st.button("Retirar selección"):
-    equipo_casa_input = "Ninguno"
-    equipo_visita_input = "Ninguno"
+if st.button("Remove selection"):
+    equipo_casa_input = "None"
+    equipo_visita_input = "None"
 else:
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 
-st.markdown("Has registrado el siguiente equipo en casa: " + equipo_casa_input)
-st.markdown("Has registrado el siguiente equipo de visita: " + equipo_visita_input)
+st.markdown("You have registered the following home team: " + equipo_casa_input)
+st.markdown("You have registered the following visiting team: " + equipo_visita_input)
 
 latest_iteration = st.empty()
 bar = st.progress(0)
 
 for i in range(100):
-    latest_iteration.markdown(f'Reuniendo índices ofensivos y defensivos por equipo seleccionado. Porcentaje completado {i+1}')
+    latest_iteration.markdown(f'Collecting offensive and defensive indicators for the selected team. Percentage completed {i+1}')
     bar.progress(i+1)
     time.sleep(0.1)
 
@@ -120,7 +120,7 @@ latest_iteration2 = st.empty()
 bar2 = st.progress(0)
 
 for i in range(100):
-    latest_iteration2.markdown(f'Recogiendo logos de los equipos. Porcentaje completado {i+1}')
+    latest_iteration2.markdown(f'Collecting team logos. Percentage completed {i+1}')
     bar2.progress(i+1)
     time.sleep(0.1)
 
@@ -302,7 +302,7 @@ try:
     with col2:
         st.write(equipo_casa_input)
     with mid2:
-        st.markdown("contra")
+        st.markdown("against")
     with col3:
         try:
             st.image(logo_road(), width=60)
@@ -311,15 +311,15 @@ try:
     with col4:
         st.markdown(equipo_visita_input)
 except TypeError:
-    st.markdown("Por favor seleccioná equipos")
+    st.markdown("Please select teams")
 
-st.write("Simulación de partido")
+st.write("Match simulation")
 
 latest_iteration3 = st.empty()
 bar3= st.progress(0)
 
 for i in range(100):
-    latest_iteration3.markdown(f'Calculando goles esperados por equipo. Porcentaje completado {i+1}')
+    latest_iteration3.markdown(f'Calculating expected goals by team. Percentage completed {i+1}')
     bar3.progress(i+1)
     time.sleep(0.1)
 
@@ -349,10 +349,10 @@ except IndexError:
 col5, mid4, col6, mid5, col7, mid5, col8 = st.columns([1,1,5,5,1,1,5])
 
 with col6:
-    st.write('Goles esperados en el partido')
+    st.write('Expected goals in the match')
 
 with col8:
-    st.write('Goles esperados en el partido')
+    st.write('Expected goals in the match')
 
 col9, mid6, col10, mid7, col11, mid5, col12 = st.columns([1,1,5,5,1,1,5])
 
@@ -366,7 +366,7 @@ latest_iteration4 = st.empty()
 bar4 = st.progress(0)
 
 for i in range(100):
-    latest_iteration4.markdown(f'Simulando 10 000 partidos entre los equipos. Porcentaje completado {i+1}')
+    latest_iteration4.markdown(f'Simulating 10 000 matches between the teams. Percentage completed {i+1}')
     bar4.progress(i+1)
     time.sleep(0.1)
 
@@ -388,11 +388,11 @@ results = list()
 
 for i, j in zip(random_marcadores_equipo_casa, random_marcadores_equipo_visita):
     if i > j:
-        results.append("equipo de casa gana")
+        results.append("home team wins")
     elif i < j:
-        results.append("equipo de visita gana")
+        results.append("visiting team wins")
     else:
-        results.append("empate")
+        results.append("tie")
 
 resultados_posibles_equipo_casa = list(range(0, 11))
 resultados_posibles_equipo_visita = list(range(0, 11))
@@ -423,9 +423,9 @@ probabilidad_marcadores_final_visita = [((random_marcadores_equipo_visita == 0).
 
 probabilidad_marcadores_final_partido = [a * b for a, b in zip(probabilidad_casa, probabilidad_visita)]
 
-equipo_casa_gana = equipo_casa_input + " gana un " + str(round(((results.count("equipo de casa gana") / 10000) * 100),2)) + " % de las 10 000 simulaciones del partido"
-equipo_visita_gana= equipo_visita_input + " gana un " + str(round(((results.count("equipo de visita gana") / 10000) * 100),2)) + " % de las 10 000 simulaciones del partido"
-empate = "El partido termina como un empate el " + str(round(((results.count("empate") / 10000) * 100),2)) + " % de las simulaciones del partido"
+equipo_casa_gana = equipo_casa_input + " wins a " + str(round(((results.count("home team wins") / 10000) * 100),2)) + " % of the 10 000 simulations of the match"
+equipo_visita_gana= equipo_visita_input + " wins a " + str(round(((results.count("visiting team wins") / 10000) * 100),2)) + " % of the 10 000 simulations of the match"
+empate = "The match results in a tie " + str(round(((results.count("tie") / 10000) * 100),2)) + " % of the 10 000 simulations of the match"
 
 datalinea_casa = pd.DataFrame({'Equipo':[equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input,
                                          equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input, equipo_casa_input],
@@ -456,14 +456,14 @@ latest_iteration5 = st.empty()
 bar5 = st.progress(0)
 
 for i in range(100):
-    latest_iteration5.markdown(f'Resumiendo resultados de simulaciones gráficamente. Porcentaje completado {i+1}')
+    latest_iteration5.markdown(f'Summarizing the results of the simulation graphically. Percentage completed {i+1}')
     bar5.progress(i+1)
     time.sleep(0.1)
 
 st.altair_chart(datalinea_partido_grafico)
 
-etiquetas = equipo_casa_input + ' gana', equipo_visita_input + ' gana', 'Empate'
-proporciones = [results.count("equipo de casa gana"), results.count("equipo de visita gana"), results.count("empate")]
+etiquetas = equipo_casa_input + ' wins', equipo_visita_input + ' wins', 'Tie'
+proporciones = [results.count("home team wins"), results.count("visiting team wins"), results.count("tie")]
 colores = ['green', 'red', 'gold']
 
 st.markdown(equipo_casa_gana)
@@ -744,8 +744,8 @@ desempeño = frecuencia_de_marcadores_posibles
 fig2, ax2 = plt.subplots()
 ax2.bar(y_pos, frecuencia_de_marcadores_posibles, align='center', alpha=0.5)
 plt.xticks(y_pos, marcadores_posibles_partido, fontsize= 3, rotation='vertical')
-plt.ylabel('Frecuencia')
-plt.title('Frecuencia de marcadores posibles ' + equipo_casa_input + ' contra ' + equipo_visita_input)
+plt.ylabel('Frequency')
+plt.title('Frequency of possible scores ' + equipo_casa_input + ' against ' + equipo_visita_input)
 
 st.pyplot(fig2)
 
@@ -757,13 +757,13 @@ latest_iteration6 = st.empty()
 bar6 = st.progress(0)
 
 for i in range(100):
-    latest_iteration6.markdown(f'Evaluando los resultados con algoritmo, para pronosticar. Porcentaje completado {i+1}')
+    latest_iteration6.markdown(f'Evaluating results with an algorithm. Percentage completed {i+1}')
     bar6.progress(i+1)
     time.sleep(0.1)
 
 from scipy.stats import chi2
 
-simulated=[results.count("equipo de casa gana"),results.count("empate"),results.count("equipo de visita gana")]
+simulated=[results.count("home team wins"),results.count("tie"),results.count("visiting team wins")]
 
 simulations =list(range(1,5000))
 simulations_=[]
@@ -821,11 +821,11 @@ for n in expected_f:
 
 def forecast():
     if all(i>cr for i in x_list):
-        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and ((results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000)+0.02: return(str(equipo_casa_input) + " gana:")
-        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and ((results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000)+0.02: return(str(equipo_visita_input) + " gana:")
-        else: return("el partido termina en un empate:")
+        if ((results.count("home team wins")) / 10000) > ((results.count("visiting team wins")) / 10000)+0.02 and ((results.count("home team wins")) / 10000) > ((results.count("tie"))/10000)+0.02: return(str(equipo_casa_input) + " wins:")
+        elif ((results.count("visiting team wins")) / 10000) > ((results.count("home team wins")) / 10000)+0.02 and ((results.count("visiting team wins")) / 10000) > ((results.count("tie"))/10000)+0.02: return(str(equipo_visita_input) + " wins:")
+        else: return("the match results in a tie:")
     else:
-        return("el partido termina en un empate:")
+        return("the match results in a tie:")
 
 Results = results
 Scores = random_marcadores_partido
@@ -835,9 +835,9 @@ forecast_scores_dataframe=pd.DataFrame(
      'Scores': Scores})
 
 
-scores_home_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "equipo de casa gana"]
-scores_road_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "equipo de visita gana"]
-scores_tie = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "empate"]
+scores_home_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "home team wins"]
+scores_road_team_wins = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "visiting team wins"]
+scores_tie = forecast_scores_dataframe.loc[forecast_scores_dataframe.Results == "tie"]
 
 idxmax_score_home_team_wins = scores_home_team_wins['Scores'].value_counts().sort_index().idxmax()
 idxmax_score_road_team_wins = scores_road_team_wins['Scores'].value_counts().sort_index().idxmax()
@@ -845,27 +845,27 @@ idxmax_score_tie = scores_tie['Scores'].value_counts().sort_index().idxmax()
 
 def score_forecast():
     if all(i>cr for i in x_list):
-        if ((results.count("equipo de casa gana")) / 10000) > ((results.count("equipo de visita gana")) / 10000)+0.02 and (
-                (results.count("equipo de casa gana")) / 10000) > ((results.count("empate"))/10000)+0.02:
+        if ((results.count("home team wins")) / 10000) > ((results.count("visting team wins")) / 10000)+0.02 and (
+                (results.count("home team wins")) / 10000) > ((results.count("tie"))/10000)+0.02:
             return(idxmax_score_home_team_wins)
-        elif ((results.count("equipo de visita gana")) / 10000) > ((results.count("equipo de casa gana")) / 10000)+0.02 and (
-                (results.count("equipo de visita gana")) / 10000) > ((results.count("empate"))/10000)+0.02:
+        elif ((results.count("visiting team wins")) / 10000) > ((results.count("home team wins")) / 10000)+0.02 and (
+                (results.count("visiting team wins")) / 10000) > ((results.count("tie"))/10000)+0.02:
             return(idxmax_score_road_team_wins)
         else:
             return(idxmax_score_tie)
     else:
         return(idxmax_score_tie)
 
-st.subheader("Resultado de las simulaciones")
+st.subheader("Result of the simulations")
 
-st.markdown("Después de 10 000 simulaciones del\npartido, y considerando los últimos\níndices ofensivos y defensivos de\nlos equipos, el pronóstico es\nque " + str(forecast()) + "\n" + str(score_forecast()))
+st.markdown("After 10 000 simulations of\nthe match, and considering the lastest\noffensive and defensive indicators\nof the teams, the forecast is\nthat " + str(forecast()) + "\n" + str(score_forecast()))
 
-st.subheader("Fuentes")
+st.subheader("Sources")
 
-st.markdown("Los datos de la simulación provienen del repositorio público actualizado de FiveThirtyEight\nen GitHub sobre el Soccer Power Index, disponible en:")
+st.markdown("The data for the simulation come from the latest information in the public repository published by FiveThirtyEight\nin GitHub as the basis for their Soccer Power Index, available in:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
-st.markdown("Los logos y banderas de los equipos provienen de imágenes en el dominio público,\ndisponibles en:")
+st.markdown("The team logos and the flags are images in the piblic domain,\navailable in:")
 link2='Wikipedia [link](https://www.Wikipedia.org)'
 st.markdown(link2,unsafe_allow_html=True)
