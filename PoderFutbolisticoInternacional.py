@@ -56,7 +56,7 @@ for i in range(100):
     bar0.progress(i+1)
     time.sleep(0.1)
 
-st.markdown("You can simulate matches by browsing to the table presented below")
+st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below")
 
 @st.cache
 def load_data():
@@ -83,7 +83,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("It is possible to run a new\nsimulation even if the system \nhas started a new simulation process,\n or if the system is fetching updated information, in which cases the screen will be greyed out.\nJust overrun the process, select new teams and click to start simulation")
+st.markdown("It is possible to run a new\nsimulation even if the system \nhas started a new simulation process,\n or if the system is fetching updated information, in which cases the screen will be greyed out.\nJust overrun the process, select new teams and click to start simulation.")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
