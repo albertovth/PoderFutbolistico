@@ -21,7 +21,7 @@ import wikipedia
 import unicodedata
 import math
 
-st.title('Soccer Matches Predictor \nClubs and National Teams')
+st.title('Football Matches Predictor \nClubs and National Teams')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
@@ -83,7 +83,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("It is possible to run a new\nsimulation even though the system either\nhas started a simulation process,\n the system is fetching new information or even though the screen is greyed out")
+st.markdown("It is possible to run a new\nsimulation even if the system \nhas started a new simulation process,\n or if the system is fetching updated information, in which cases the screen will be greyed out")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
