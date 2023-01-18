@@ -56,7 +56,7 @@ for i in range(100):
     bar0.progress(i+1)
     time.sleep(0.1)
 
-st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below")
+st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below.")
 
 @st.cache
 def load_data():
