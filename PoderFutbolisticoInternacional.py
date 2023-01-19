@@ -863,10 +863,10 @@ st.markdown("After 10 000 simulations of\nthe match, and considering the lastest
 
 st.subheader("Sources")
 
-st.markdown("Updated data for the simulation come from the public repository published by FiveThirtyEight\nin GitHub, as the basis for their Soccer Power Index, available at:")
+st.markdown("Updated data for the simulation comes from the public repository published by FiveThirtyEight\nin GitHub, whic is the basis for their Soccer Power Index, available at:")
 link='Soccer-SPI Github [link](https://github.com/fivethirtyeight/data/tree/master/soccer-spi)'
 st.markdown(link,unsafe_allow_html=True)
 
-st.markdown("The team logos and the flags are images in the piblic domain,\navailable in:")
+st.markdown("The team logos and the flags are images in the public domain,\navailable at:")
 link2='Wikipedia [link](https://www.Wikipedia.org)'
 st.markdown(link2,unsafe_allow_html=True)
