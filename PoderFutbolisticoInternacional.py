@@ -21,7 +21,7 @@ import wikipedia
 import unicodedata
 import math
 
-st.title('Football Matches Predictor \nClubs and National Teams')
+st.title('Soccer Match Predictor - Clubs and National Teams')
 ssl._create_default_https_context = ssl._create_unverified_context
 
 
