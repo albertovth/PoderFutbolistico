@@ -49,7 +49,7 @@ spi = pd.concat(spi_frames)
 spi.sort_values(by=['spi'], ascending=False, inplace=True)
 spi=spi.reset_index(drop=True)
 
-st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below. Note: This project uses [data by FiveThirtyEight](https://github.com/fivethirtyeight/data/tree/master/soccer-spi), a project which was frozen in 2023. For a model that uses more recent data for national teams, refer to this link forthcoming")
+st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below.")
 
 @st.cache
 def load_data():
@@ -76,7 +76,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("The system will automatically run a simulation\nonce you select teams. \nYou can also rerun the simulation\nwith the buttons provided below. Yo can also remove your selection, and start over.\nResults will appear at the bottom of the screen. In some cases this may take some time, depending on your connection.")
+st.markdown("The system will automatically run a simulation\nonce you select teams. \nYou can also rerun the simulation\nwith the buttons provided below. Yo can also remove your selection, and start over.\nResults will appear at the bottom of the screen. In some cases this may take some time, depending on your connection.\nNote: This project uses [data by FiveThirtyEight](https://github.com/fivethirtyeight/data/tree/master/soccer-spi), a project which was frozen in 2023. For a model that uses more recent data for national teams, refer to this link forthcoming")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
