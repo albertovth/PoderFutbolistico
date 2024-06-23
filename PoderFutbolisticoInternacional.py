@@ -52,14 +52,9 @@ spi=spi.reset_index(drop=True)
 latest_iteration0= st.empty()
 bar0 = st.progress(0)
 
-for i in range(100):
-    latest_iteration0.markdown(f'Updating the database with the latest information. Percentage completed {i+1}')
-    bar0.progress(i+1)
-    time.sleep(0.1)
-
 st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below.")
 
-@st.cache
+@st.cache_data
 def load_data():
     return spi
 
@@ -84,7 +79,7 @@ st.markdown(hide_dataframe_row_index, unsafe_allow_html=True)
 st.dataframe(spi)
 
 st.subheader('Simulate match\nSelect teams')
-st.markdown("It is possible to run a new\nsimulation even if the system \nhas started a new simulation process,\n or if the system is fetching updated information, in which cases the screen will be greyed out.\nJust overrun the process, select new teams and click to start simulation.")
+st.markdown("The system will automatically run a simulation\nonce you select teams. \nYou can also rerun the simulation\nwith the buttons provided below. Yo can also remove your selection, and start over.\nResults will appear at the bottom of the screen. In some cases this may take some time, depending on your connection.")
 
 params={
     'equipo_casa' : st.selectbox('Home team', Equipo_casa),
@@ -92,7 +87,7 @@ params={
 }
 
 
-if st.button("Start simulation, based on your selection"):
+if st.button("Run or rerun simulation, based on your selection"):
     equipo_casa_input = params['equipo_casa']
     equipo_visita_input = params['equipo_visita']
 else:
@@ -112,18 +107,9 @@ st.markdown("You have registered the following visiting team: " + equipo_visita_
 latest_iteration = st.empty()
 bar = st.progress(0)
 
-for i in range(100):
-    latest_iteration.markdown(f'Collecting offensive and defensive indicators for the selected team. Percentage completed {i+1}')
-    bar.progress(i+1)
-    time.sleep(0.1)
 
 latest_iteration2 = st.empty()
 bar2 = st.progress(0)
-
-for i in range(100):
-    latest_iteration2.markdown(f'Collecting team logos. Percentage completed {i+1}')
-    bar2.progress(i+1)
-    time.sleep(0.1)
 
 input = ['Afghanistan', 'Albania', 'Algeria', 'Samoa', 'Andorra', 'Angola', 'Anguilla', 'Antigua and Barbuda', 'Argentina', 'Armenia', 'Aruba', 'Australia', 'Austria', 'Azerbaijan', 'Bahamas', 'Bahrain', 'Bangladesh', 'Barbados', 'Basque Country', 'Belarus', 'Belgium', 'Belize', 'Benin', 'Bermuda', 'Bhutan', 'Bolivia', 'Bonaire', 'Bosnia and Herzegovina', 'Botswana', 'Brazil', 'British Virgin Islands', 'Brunei', 'Bulgaria', 'Burkina Faso', 'Burundi', 'Cambodia', 'Cameroon', 'Canada', 'Cape Verde Islands', 'Cayman Islands', 'Central African Republic', 'Chad', 'Chile', 'China PR', 'Chinese Taipei', 'Colombia', 'Comoros', 'Congo', 'Congo DR', 'Cook Islands', 'Costa Rica', 'Croatia', 'Cuba', 'Curacao', 'Cyprus', 'Czech Republic', 'Denmark', 'Djibouti', 'Dominica', 'Dominican Republic', 'Ecuador', 'Egypt', 'El Salvador', 'England', 'Equatorial Guinea', 'Eritrea', 'Estonia', 'Ethiopia', 'Faroe Islands', 'Fiji', 'Finland', 'France', 'French Guiana', 'Gabon', 'Gambia', 'Georgia', 'Germany', 'Ghana', 'Gibraltar', 'Greece', 'Grenada', 'Guadeloupe', 'Guam', 'Guatemala', 'Guinea', 'Guinea-Bissau', 'Guyana', 'Haiti', 'Honduras', 'Hong Kong', 'Hungary', 'Iceland', 'India', 'Indonesia', 'Iran', 'Iraq', 'Israel', 'Italy', 'Ivory Coast', 'Jamaica', 'Japan', 'Jordan', 'Kazakhstan', 'Kenya', 'Kosovo', 'Kuwait', 'Kyrgyzstan', 'Laos', 'Latvia', 'Lebanon', 'Lesotho', 'Liberia', 'Libya', 'Liechtenstein', 'Lithuania', 'Luxembourg', 'Macau', 'Madagascar', 'Malawi', 'Malaysia', 'Maldives', 'Mali', 'Malta', 'Martinique', 'Mauritania', 'Mauritius', 'Mexico', 'Moldova', 'Mongolia', 'Montenegro', 'Montserrat', 'Morocco', 'Mozambique', 'Myanmar', 'Namibia', 'Nepal', 'Netherlands', 'New Caledonia', 'New Zealand', 'Nicaragua', 'Niger', 'Nigeria', 'North Korea', 'North Macedonia', 'Northern Ireland', 'Northern Mariana Islands', 'Norway', 'Oman', 'Pakistan', 'Palestine', 'Panama', 'Papua New Guinea', 'Paraguay', 'Peru', 'Philippines', 'Poland', 'Portugal', 'Puerto Rico', 'Qatar', 'Rep of Ireland', 'Romania', 'Russia', 'Rwanda', 'San Marino', 'Sao Tome and Principe', 'Saudi Arabia', 'Scotland', 'Senegal', 'Serbia', 'Seychelles', 'Sierra Leone', 'Singapore', 'Sint Maarten', 'Slovakia', 'Slovenia', 'Solomon Islands', 'Somalia', 'South Africa', 'South Korea', 'South Sudan', 'Spain', 'Sri Lanka', 'St. Kitts and Nevis', 'St. Lucia', 'St. Martin', 'St. Vincent and the Grenadines', 'Sudan', 'Suriname', 'Swaziland', 'Sweden', 'Switzerland', 'Syria', 'Tahiti', 'Tajikistan', 'Tanzania', 'Thailand', 'Timor-Leste', 'Togo', 'Tonga', 'Trinidad and Tobago', 'Tunisia', 'Turkey', 'Turkmenistan', 'Turks and Caicos Islands', 'Tuvalu', 'Uganda', 'Ukraine', 'United Arab Emirates', 'Uruguay', 'US Virgin Islands', 'USA', 'Uzbekistan', 'Vanuatu', 'Venezuela', 'Vietnam', 'Wales', 'Yemen', 'Zambia', 'Zanzibar', 'Zimbabwe', 'Bayern Munich', 'Manchester City', 'Paris Saint-Germain', 'Liverpool', 'Barcelona', 'Real Madrid', 'Ajax', 'Tottenham Hotspur', 'FC Salzburg', 'Chelsea', 'Arsenal', 'Internazionale', 'Atletico Madrid', 'FC Porto', 'Napoli', 'Borussia Dortmund', 'Villarreal', 'AC Milan', 'RB Leipzig', 'Sporting CP', 'Benfica', 'Brighton and Hove Albion', 'Celtic', 'PSV', 'Zenit St Petersburg', 'Manchester United', 'Real Sociedad', 'Athletic Bilbao', 'Bayer Leverkusen', 'Lyon', 'Newcastle', 'Atalanta', 'Stade Rennes', 'Marseille', 'AS Roma', 'Feyenoord', 'Real Betis', 'West Ham United', '1. FC Union Berlin', 'SC Freiburg', 'Aston Villa', 'Crystal Palace', 'Valencia', 'Borussia Monchengladbach', 'Club Brugge', 'Juventus', 'Lazio', 'Brentford', 'AS Monaco', 'Celta Vigo', 'Flamengo', 'TSG Hoffenheim', 'FC Cologne', 'Lille', 'Rangers', 'Eintracht Frankfurt', 'Lens', 'Osasuna', 'Mainz', 'Sevilla FC', 'Braga', 'Wolverhampton', 'Leicester City', 'Fiorentina', 'VfB Stuttgart', 'VfL Wolfsburg', 'Strasbourg', 'Fenerbahce', 'AZ', 'FC Twente', 'Slavia Prague', 'Leeds United', 'Monterrey', 'Nice', 'Southampton', 'Club América', 'Everton', 'Dinamo Zagreb', 'Torino', 'Palmeiras', 'Genk', 'Udinese', 'Young Boys', 'Rayo Vallecano', 'Atletico Mineiro', 'Werder Bremen', 'Internacional', 'Shakhtar Donetsk', 'Fulham', 'Hertha Berlin', 'Espanyol', 'Getafe', 'Girona FC', 'Norwich City', 'Philadelphia Union', 'Sassuolo', 'Almeria', 'Slovácko', 'Verona', 'São Paolo', 'Nantes', 'Schalke 04', 'Fluminense', 'Tigres UANL', 'Mallorca', 'Pachuca', 'CSKA Moscow', 'Steaua Bucuresti', 'Olympiacos', 'Sheffield United', 'River Plate', 'Red Star Belgrade', 'Real Valladolid', 'Reims', 'Trabzonspor', 'FC Augsburg', 'Spartak Moscow', 'FC Utrecht', 'Anderlecht', 'Antwerp', 'West Bromwich Albion', 'VfL Bochum', 'Cadiz', 'Corinthians', 'Ferencvaros', 'SC Dnipro-1', 'Lorient', 'Molde', 'Istanbul Basaksehir', 'Bodo/Glimt', 'Bragantino', 'Dynamo Kiev', 'Nottingham Forest', 'Watford', 'Bologna', 'Los Angeles FC', 'Viktoria Plzen', 'AFC Bournemouth', 'KAA Gent', 'FC Sheriff Tiraspol', 'Elche', 'FC Copenhagen', 'Kawasaki Frontale', 'Montpellier', 'SK Sturm Graz', 'Besiktas', 'Troyes', 'Toulouse', 'Burnley', 'Yokohama F. Marinos', 'Vitesse', 'Sampdoria', 'Guimaraes', 'Gil Vicente', 'Lecce', 'Brest', 'Angers', 'FC Krasnodar', 'Santos', 'Galatasaray', 'Ceará', 'Dinamo Moscow', 'Guadalajara', 'FC Midtjylland', 'Levante', 'AC Ajaccio', 'FK Partizan Belgrade', 'LASK Linz', 'Fortaleza', 'Santos Laguna', 'Union Saint Gilloise', 'Atlético Paranaense', 'Urawa Red Diamonds', 'Clermont Foot', 'Sochi', 'Cremonese', 'Empoli', 'Heerenveen', 'New York City FC', 'Middlesbrough', 'Konyaspor', 'Salernitana', 'Lech Poznan', 'Auxerre', 'NEC', 'Montreal Impact', 'América Mineiro', 'Portimonense', 'Monza', 'Famalicao', 'Rostov', "Hapoel Be'er", 'Basel', 'Spezia', 'St Etienne', 'Chaves', 'Vizela', 'Cuiaba', 'Rosenborg', 'León', 'Boca Juniors', 'Apollon Limassol', 'Estoril Praia', 'Cagliari', 'St Gallen', 'Bordeaux', 'Hamburg SV', 'Metz', 'Santa Clara', 'Botafogo', 'PAOK Salonika', 'Puebla', 'Maccabi Haifa', 'Granada', 'Boavista', 'New York Red Bulls', 'FK Austria Vienna', 'Rio Ave', 'Nashville SC', 'Adana Demirspor', 'Panathinaikos', 'Sparta', 'Los Angeles Galaxy', 'Atlas', 'Silkeborg', 'FC Groningen', 'RKC', 'Cruz Azul', 'Parma', 'Sochaux', 'Casa Pia', 'Rapid Vienna', 'Atlanta United FC', 'Sporting de Charleroi', 'Lokomotiv Moscow', 'AEK Athens', 'Millwall', 'Randers FC', 'Huracán', 'Luton Town', 'Preston North End', 'Austin FC', 'Toluca', 'Sanfrecce Hiroshima', 'Emmen', 'FK Qarabag', 'Stoke City', 'Pumas Unam', 'Velez Sarsfield', 'AEK Larnaca', 'Alanyaspor', 'FC Nordsjaelland', 'Genoa', 'Go Ahead Eagles', 'Bristol City', 'Antalyaspor', 'Wolfsberger AC', 'Seattle Sounders FC', 'Racing Club', 'St. Truidense', 'Cerezo Osaka', 'Valerenga', 'Queens Park Rangers', 'Coventry City', 'CFR 1907 Cluj', 'Cambuur Leeuwarden', 'Aberdeen', 'Necaxa', 'Caen', 'Estudiantes', 'Columbus Crew', 'Kashima Antlers', 'FC Dallas', 'Terek Grozny', 'Orlando City SC', 'Djurgardens IF', 'Tijuana', 'Atlético Goianiense', 'Talleres de Córdoba', 'Tigre', 'Gazisehir Gaziantep', 'Kasimpasa', 'Swansea City', 'Argentinos Juniors', 'Brondby', 'Krylia Sovetov', 'New England Revolution', 'FC Volendam', 'Maritimo', 'SV Darmstadt 98', 'Hammarby', 'Ludogorets', 'Portland Timbers', 'Goiás', 'San Lorenzo', 'FC Cincinnati', 'Lillestrom', 'FC Arouca', 'Cardiff City', 'Blackburn', 'CA Independiente', 'Minnesota United FC', 'Excelsior', 'OH Leuven', 'Eibar', 'Alavés', 'Hearts', 'Real Salt Lake', 'Coritiba', 'KV Mechelen', 'Blackpool', 'Chicago Fire', 'FC Zurich', 'BK Hacken', 'Pacos Ferreira', 'Brescia', 'Viborg', 'Sheffield Wednesday', 'Sunderland', 'SC Paderborn', 'Fortuna Düssseldorf', 'Las Palmas', 'Benevento', 'Ipswich Town', 'Frosinone', 'Standard Liege', 'Fortuna Sittard', 'Querétaro', 'FC Luzern', 'Colorado Rapids', 'Huddersfield Town', 'Avaí', 'Hibernian', 'Slovan Bratislava', 'FC St. Pauli', 'FC Juárez', 'Sporting Kansas City', 'Gimnasia La Plata', "Newell's Old Boys", 'Kayserispor', 'Aris Salonika', 'Paris FC', 'FK Nizhny Novgorod', 'Mamelodi Sundowns', 'Union Santa Fe', 'Toronto FC', 'Hull City', 'Viking FK', 'Derby County', 'Real Oviedo', 'AaB', 'Omonia Nicosia', 'Guingamp', 'Le Havre', 'Juventude', 'Defensa y Justicia', 'Wigan', 'Real Zaragoza', 'F.B.C Unione Venezia', 'Lanus', 'Arminia Bielefeld', 'Servette', 'Malmo FF', 'Fatih Karagümrük', 'IFK Goteborg', 'IF Elfsborg', 'Mazatlán FC', 'Sagan Tosu', 'FC Tokyo', 'SD Huesca', 'KVC Westerlo', 'Rosario Central', 'Reading', 'Karlsruher SC', 'Atlético San Luis', 'Amiens', 'SK Austria Klagenfurt', 'Inter Miami CF', 'Austria Lustenau', 'AGF Aarhus', 'WSG Swarovski Wattens', 'Cercle Brugge', 'Sivasspor', 'Sporting Gijón', 'Nagoya Grampus Eight', 'Birmingham', 'Godoy Cruz', 'Livingston', 'Dijon FCO', 'FC Lugano', 'FC Cartagena', 'Rigas Futbola Skola', 'Banfield', '1. FC Heidenheim 1846', 'Rotherham United', 'Platense', 'Hatayspor', 'FC Sion', 'Hartberg', 'Central Córdoba Santiago del Estero', 'Grasshoppers Zürich', 'Stromsgodset', 'Ballkani', 'FC Khimki', 'AIK', 'Leganes', 'Motherwell', 'Vancouver Whitecaps', 'Colon Santa Fe', 'Charlotte FC', 'Ascoli', 'San Jose Earthquakes', 'Vissel Kobe', 'Tenerife', 'Sarmiento', 'Zalgiris Vilnius', 'Patronato', 'Cittadella', 'Atlético Tucumán', 'Portsmouth', 'KV Oostende', 'KV Kortrijk', 'Barnsley', '1. FC Nürnberg', 'DC United', 'Shimizu S-Pulse', 'Spal', 'Odense BK', 'Arsenal Sarandi', 'Fakel Voronezh', 'Hannover 96', 'Nimes', 'Ross County', 'Houston Dynamo', 'Ternana', 'Haugesund', 'SV Ried', 'Reggina', 'Pisa', 'Giresunspor', 'Holstein Kiel', 'Bari', 'Ural Sverdlovsk Oblast', 'Sarpsborg', 'Barracas Central', 'Kashiwa Reysol', 'SpVgg Greuther Fürth', 'Melbourne City', 'Kilmarnock', 'Gazovik Orenburg', 'AC Horsens', 'Ankaragucu', 'St Mirren', 'Tromso', 'Volos NFC', 'SD Ponferradina', 'Valenciennes', 'Burgos', 'Perugia', 'SV Zulte Waregem', 'Tampa Bay Rowdies', 'Umraniyespor', 'St Johnstone', 'Kalmar FF', 'Villarreal B', 'Peterborough United', 'Consadole Sapporo', 'Mirandes', 'Atromitos', 'UD Ibiza', 'Bastia', 'IFK Norrkoping', 'Louisville City FC', 'Bolton', 'Dundee Utd', 'Málaga', 'Guangzhou Evergrande', 'HJK Helsinki', 'Albacete', 'Cashpoint SC Rheindorf Altach', 'Odd BK', 'Grenoble', 'Eupen', 'Ionikos FC', 'Milton Keynes Dons', 'Wycombe Wanderers', 'FC Vaduz', 'Lyngby', 'Kyoto Purple Sanga', 'Asteras Tripolis', 'Como', 'Istanbulspor', 'Panetolikos', 'Hansa Rostock', 'FC Andorra', 'Avispa Fukuoka', 'Shonan Bellmare', 'Racing Santander', 'Plymouth Argyle', 'Lugo', 'Modena', 'Torpedo Moskow', 'San Diego Loyal SC', 'Aalesund', 'Sydney FC', 'Oxford United', 'Annecy', 'Hamarkamaratene', 'Pau', 'Aldosivi', 'Palermo', 'Laval', 'Melbourne Victory', 'Beijing Guoan', 'Kristiansund BK', 'Gamba Osaka', 'Giannina', 'San Antonio FC', 'Birmingham Legion FC', 'Niort', 'Mjallby', 'Jahn Regensburg', 'Cosenza', 'Shanghai SIPG', 'SV Sandhausen', 'RFC Seraing', 'Charlton Athletic', 'Rodez', 'OFI Crete', 'Sudtirol', '1. FC Kaiserslautern', 'Salford City', 'Orlando Pirates', 'US Quevilly', 'Sandefjord', 'Levadiakos', 'Rio Grande Valley FC Toros', 'Pittsburgh Riverhounds', 'Pyunik Yerevan', 'Memphis 901 FC', 'Western Sydney FC', 'Western United', 'Adelaide United', 'IK Sirius', 'Central Coast Mariners', 'Sacramento Republic FC', 'Kaizer Chiefs', 'SuperSport United', 'Newcastle Jets', 'Shrewsbury Town', 'Shamrock Rovers', 'Eintracht Braunschweig', 'Oakland Roots', 'Miami FC', 'New Mexico United', 'Colorado Springs Switchbacks FC', '1. FC Magdeburg', 'IFK Värnamo', 'Lincoln City', 'Jubilo Iwata', 'Shandong Luneng', 'Jiangsu Suning FC', 'Black Aces', 'Mansfield Town', 'Fleetwood Town', 'Exeter City', 'Lamia', 'Winterthur', 'Cambridge United', 'Varbergs BoIS FC', 'Brisbane Roar', 'El Paso Locomotive FC', 'Cheltenham Town', 'Leyton Orient', 'Doncaster Rovers', 'Bristol Rovers', 'Macarthur FC', 'Stellenbosch FC', 'Accrington Stanley', 'Arizona United', 'Northampton Town', 'Detroit City FC', 'Swindon Town', 'Port Vale', 'Orange County SC', 'AmaZulu', 'Golden Arrows', 'Degerfors IF', 'Colchester United', 'Forest Green Rovers', 'Tulsa Roughnecks', 'Wellington Phoenix', 'FK Jerv', 'Royal AM', 'Burton Albion', 'LA Galaxy II', 'Moroka Swallows', 'Hartford Athletic', 'Charleston Battery', 'Helsingborgs IF', 'Tianjin Teda', 'Tranmere Rovers', 'Monterey Bay', 'Morecambe', 'Sekhukhune United', 'Shanghai Greenland', 'Richards Bay', 'Chippa United', 'Bradford City', 'Newport County', 'Sutton United', 'TS Galaxy', 'Stevenage', 'Crewe Alexandra', 'Hebei China Fortune FC', 'Tshakhuma Tsha Madzivhandila', 'Maritzburg Utd', 'Henan Jianye', 'AFC Wimbledon', 'Indy Eleven', 'Dalian Aerbin', 'Guangzhou RF', 'Perth Glory', 'Wuhan Zall', 'Stockport County', 'GIF Sundsvall', 'Barrow', 'Gillingham', 'Grimsby Town', 'Rochdale', 'Tianjin Quanujian', 'Shenzhen FC', 'Crawley Town', 'Chongqing Lifan', 'Las Vegas Lights FC', 'Walsall', 'Loudoun United FC', 'Harrogate Town', 'Carlisle United', 'Atlanta United 2', 'Hartlepool', 'Guizhou Renhe', 'New York Red Bulls II', 'None']
 
@@ -319,11 +305,6 @@ st.write("Match simulation")
 latest_iteration3 = st.empty()
 bar3= st.progress(0)
 
-for i in range(100):
-    latest_iteration3.markdown(f'Calculating expected goals by team. Percentage completed {i+1}')
-    bar3.progress(i+1)
-    time.sleep(0.1)
-
 try:
     index_casa_equipo = df_pf.index[df_pf['name'] == equipo_casa_input]
     index_visita_equipo = df_pf.index[df_pf['name'] == equipo_visita_input]
@@ -365,11 +346,6 @@ with col12:
 
 latest_iteration4 = st.empty()
 bar4 = st.progress(0)
-
-for i in range(100):
-    latest_iteration4.markdown(f'Simulating 10 000 matches between the teams. Percentage completed {i+1}')
-    bar4.progress(i+1)
-    time.sleep(0.1)
 
 probabilidad_casa = [random.random()]
 
@@ -456,10 +432,6 @@ datalinea_partido_grafico= alt.Chart(datalinea_partido).mark_line().encode(
 latest_iteration5 = st.empty()
 bar5 = st.progress(0)
 
-for i in range(100):
-    latest_iteration5.markdown(f'Summarizing the results of the simulation graphically. Percentage completed {i+1}')
-    bar5.progress(i+1)
-    time.sleep(0.1)
 
 st.altair_chart(datalinea_partido_grafico)
 
@@ -757,10 +729,6 @@ st.pyplot(fig2)
 latest_iteration6 = st.empty()
 bar6 = st.progress(0)
 
-for i in range(100):
-    latest_iteration6.markdown(f'Evaluating results with an algorithm. Percentage completed {i+1}')
-    bar6.progress(i+1)
-    time.sleep(0.1)
 
 from scipy.stats import chi2
 
