@@ -49,10 +49,7 @@ spi = pd.concat(spi_frames)
 spi.sort_values(by=['spi'], ascending=False, inplace=True)
 spi=spi.reset_index(drop=True)
 
-latest_iteration0= st.empty()
-bar0 = st.progress(0)
-
-st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below.")
+st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below. Note: This project uses [data by FiveThirtyEight](https://github.com/fivethirtyeight/data/tree/master/soccer-spi), a project which was frozen in 2023. For a model that uses more recent data for national teams, refer to this link forthcoming")
 
 @st.cache
 def load_data():
