@@ -54,7 +54,7 @@ bar0 = st.progress(0)
 
 st.markdown("You can simulate matches by selecting teams with the drop-down lists provided under the table presented below.")
 
-@st.cache_data
+@st.cache
 def load_data():
     return spi
 
